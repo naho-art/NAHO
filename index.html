@@ -336,6 +336,80 @@
   .overlay-btn:hover { background: rgba(250,248,244,0.14); }
   .overlay-btn.buy { border-color: var(--accent-light); color: var(--accent-light); }
 
+  /* LIGHTBOX */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: rgba(10,9,8,0.92);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox-inner {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .lightbox-img {
+    max-width: 100%;
+    max-height: 78vh;
+    width: auto;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+  .lightbox-svg {
+    max-width: min(700px, 88vw);
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+  .lightbox-info { text-align: center; color: rgba(250,248,244,0.85); }
+  .lightbox-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    margin-bottom: 0.3rem;
+  }
+  .lightbox-meta { font-size: 0.72rem; letter-spacing: 0.08em; color: rgba(250,248,244,0.5); }
+  .lightbox-actions { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+  .lightbox-btn {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.4rem;
+    border: 0.5px solid rgba(250,248,244,0.3);
+    color: rgba(250,248,244,0.8);
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .lightbox-btn:hover { background: rgba(250,248,244,0.1); }
+  .lightbox-btn.buy { border-color: var(--accent-light); color: var(--accent-light); }
+  .lightbox-close {
+    position: absolute;
+    top: -2.5rem;
+    right: 0;
+    font-size: 1.4rem;
+    color: rgba(250,248,244,0.6);
+    cursor: pointer;
+    background: none;
+    border: none;
+    line-height: 1;
+    padding: 0.25rem 0.5rem;
+    transition: color 0.2s;
+  }
+  .lightbox-close:hover { color: white; }
+  
   .painting-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1rem;
@@ -1091,6 +1165,22 @@
   </form>
 </section>
 
+  <!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <div id="lightbox-media"></div>
+    <div class="lightbox-info">
+      <div class="lightbox-title" id="lightbox-title"></div>
+      <div class="lightbox-meta" id="lightbox-meta"></div>
+      <div class="lightbox-actions">
+        <button class="lightbox-btn buy" id="lightbox-buy"></button>
+        <button class="lightbox-btn" onclick="closeLightbox()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
 <footer>
   <span>© 2026 NAHO · all rights reserved</span>
   <span class="footer-logo">NAHO</span>
@@ -1101,11 +1191,54 @@
 function toggleSeries(id) {
   const item = document.getElementById(id);
   const isOpen = item.classList.contains('open');
-  // close all
   document.querySelectorAll('.series-item.open').forEach(el => el.classList.remove('open'));
-  // open clicked if it was closed
   if (!isOpen) item.classList.add('open');
 }
+
+function openLightbox(card) {
+  const frame  = card.querySelector('.painting-frame');
+  const title  = card.querySelector('.painting-title').textContent;
+  const meta   = card.querySelector('.painting-info-text').textContent;
+  const buyBtn = card.querySelector('.overlay-btn.buy');
+  const buyText = buyBtn ? buyBtn.textContent : '';
+
+  const mediaEl = frame.querySelector('img') || frame.querySelector('svg');
+  const clone = mediaEl.cloneNode(true);
+
+  if (clone.tagName.toLowerCase() === 'img') {
+    clone.className = 'lightbox-img';
+  } else {
+    clone.className = 'lightbox-svg';
+  }
+
+  document.getElementById('lightbox-media').innerHTML = '';
+  document.getElementById('lightbox-media').appendChild(clone);
+  document.getElementById('lightbox-title').textContent = title;
+  document.getElementById('lightbox-meta').textContent  = meta;
+  document.getElementById('lightbox-buy').textContent   = buyText;
+
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function closeLightboxBg(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.painting-card').forEach(card => {
+    card.querySelector('.painting-frame').addEventListener('click', () => openLightbox(card));
+  });
+});
 
 function handleSubmit(e) {
   e.preventDefault();
@@ -1121,6 +1254,3 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 </script>
-
-</body>
-</html>
