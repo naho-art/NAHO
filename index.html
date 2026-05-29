@@ -126,6 +126,7 @@
     width: 100%;
     height: 100%;
     display: block;
+    object-fit: cover;
   }
   .hero-caption {
     position: absolute;
@@ -144,24 +145,6 @@
     font-weight: 400;
   }
   .hero-caption span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.06em; }
-
-  /* DIVIDER */
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    padding: 2rem 3rem;
-    border-top: 0.5px solid var(--border);
-    border-bottom: 0.5px solid var(--border);
-  }
-  .divider-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    white-space: nowrap;
-  }
-  .divider-line { flex: 1; height: 0.5px; background: var(--border); }
 
   /* ── SERIES GALLERY ── */
   .gallery-section { padding: 4rem 3rem; }
@@ -274,7 +257,7 @@
     line-height: 1.8;
     margin-bottom: 1.5rem;
     max-width: 560px;
-    padding-left: calc(1.8rem + 1.5rem); /* align with name */
+    padding-left: calc(1.8rem + 1.5rem);
   }
 
   .paintings-grid {
@@ -290,7 +273,7 @@
   .painting-card:hover { transform: translateY(-5px); }
   .painting-card:hover .painting-overlay { opacity: 1; }
 
- .painting-frame {
+  .painting-frame {
     position: relative;
     background: var(--cream);
     margin-bottom: 0.85rem;
@@ -314,15 +297,14 @@
   .painting-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(26,24,20,0.55);
+    background: rgba(26,24,20,0.45);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transition: opacity 0.3s;
-    gap: 0.75rem;
   }
-  .overlay-btn {
+  .overlay-zoom {
     font-size: 0.62rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -331,10 +313,7 @@
     padding: 0.55rem 0.85rem;
     cursor: pointer;
     background: transparent;
-    transition: background 0.2s;
   }
-  .overlay-btn:hover { background: rgba(250,248,244,0.14); }
-  .overlay-btn.buy { border-color: var(--accent-light); color: var(--accent-light); }
 
   /* LIGHTBOX */
   .lightbox {
@@ -394,7 +373,6 @@
     transition: background 0.2s;
   }
   .lightbox-btn:hover { background: rgba(250,248,244,0.1); }
-  .lightbox-btn.buy { border-color: var(--accent-light); color: var(--accent-light); }
   .lightbox-close {
     position: absolute;
     top: -2.5rem;
@@ -409,7 +387,7 @@
     transition: color 0.2s;
   }
   .lightbox-close:hover { color: white; }
-  
+
   .painting-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1rem;
@@ -422,58 +400,54 @@
     align-items: center;
   }
   .painting-info-text { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.04em; }
-  .painting-price { font-size: 0.78rem; color: var(--green); font-weight: 400; }
 
-  /* PRINTS */
-  .prints-section {
+  /* PLATFORMS */
+  .platforms-section {
     background: var(--cream);
-    padding: 4rem 3rem;
+    padding: 3.5rem 3rem;
     border-top: 0.5px solid var(--border);
   }
-  .prints-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
+  .platforms-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
-  .prints-text h2 {
+  .platforms-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .platforms-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 300;
-    line-height: 1.2;
-    margin-bottom: 1rem;
   }
-  .prints-text p {
-    font-size: 0.85rem;
-    line-height: 1.85;
+  .platforms-sub {
+    font-size: 0.7rem;
     color: var(--muted);
-    margin-bottom: 2rem;
+    letter-spacing: 0.08em;
   }
-  .prints-links { display: flex; flex-direction: column; gap: 0.75rem; }
-  .print-link {
+  .platforms-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .platform-link {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.25rem;
+    gap: 0.6rem;
+    padding: 0.75rem 1.25rem;
     border: 0.5px solid var(--border);
     background: var(--warm-white);
     text-decoration: none;
     color: var(--ink);
-    transition: border-color 0.2s;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: border-color 0.2s, color 0.2s;
   }
-  .print-link:hover { border-color: var(--accent); }
-  .print-link-name { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
-  .print-link-desc { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
-  .print-link-arrow { color: var(--muted); font-size: 1rem; }
-  .prints-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .print-thumb {
-    aspect-ratio: 3/4;
-    background: var(--warm-white);
-    border: 0.5px solid var(--border);
-    overflow: hidden;
-  }
-  .print-thumb svg { width: 100%; height: 100%; display: block; }
-  .print-thumb:first-child { margin-top: 2rem; }
+  .platform-link:hover { border-color: var(--accent); color: var(--accent); }
+  .platform-link svg { flex-shrink: 0; }
 
   /* ABOUT */
   .about-section {
@@ -581,8 +555,18 @@
     justify-content: space-between;
     align-items: center;
   }
-  footer span { font-size: 0.7rem; color: rgba(250,248,244,0.3); letter-spacing: 0.06em; }
-  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: rgba(250,248,244,0.5); letter-spacing: 0.2em; }
+  .footer-copyright {
+    font-size: 0.58rem;
+    color: rgba(250,248,244,0.25);
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: rgba(250,248,244,0.5);
+    letter-spacing: 0.2em;
+  }
 
   /* ANIMATIONS */
   @keyframes fadeUp {
@@ -601,15 +585,13 @@
     .hero { grid-template-columns: 1fr; min-height: auto; }
     .hero-left { padding: 6rem 1.5rem 3rem; border-right: none; border-bottom: 0.5px solid var(--border); }
     .hero-right { height: 60vw; }
-    .gallery-section, .prints-section, .about-section { padding: 3rem 1.5rem; }
-    .prints-inner { grid-template-columns: 1fr; gap: 2rem; }
-    .prints-visual { display: none; }
+    .gallery-section, .platforms-section, .about-section { padding: 3rem 1.5rem; }
     .about-section { grid-template-columns: 1fr; gap: 1.5rem; }
     .contact-section { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
-    .divider { padding: 1.5rem; }
-    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
     .series-desc { padding-left: 0; }
     .paintings-grid { grid-template-columns: repeat(2, 1fr); }
+    .platforms-links { flex-direction: column; }
   }
   @media (max-width: 480px) {
     .paintings-grid { grid-template-columns: 1fr; }
@@ -644,21 +626,13 @@
     </a>
   </div>
   <div class="hero-right">
-   <img class="hero-painting-svg" src="photo_Garten.jpeg" alt="NAHO painting">
+    <img class="hero-painting-svg" src="photo_Garten.jpeg" alt="NAHO painting">
     <div class="hero-caption">
       <strong>In my Garden</strong>
       <span>oil · 25×30 cm · 2026</span>
     </div>
   </div>
 </section>
-
-<div class="divider">
-  <span class="divider-label">Original works</span>
-  <div class="divider-line"></div>
-  <span class="divider-label">Prints worldwide</span>
-  <div class="divider-line"></div>
-  <span class="divider-label">Realism · Landscapes</span>
-</div>
 
 <!-- GALLERY — SERIES -->
 <section class="gallery-section" id="gallery">
@@ -686,55 +660,45 @@
 
           <div class="painting-card">
             <div class="painting-frame">
-              <!-- Replace with: <img src="roads/road1.jpg" alt="City Road"> -->
               <img src="photo_Sity.jpeg" alt="In the City">
               <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €320</button>
-                <button class="overlay-btn">Print</button>
+                <span class="overlay-zoom">View</span>
               </div>
             </div>
             <div class="painting-title">City Road</div>
             <div class="painting-meta">
               <span class="painting-info-text">oil · 25×30 cm · 2026</span>
-              <span class="painting-price">€ 320</span>
             </div>
           </div>
 
           <div class="painting-card">
             <div class="painting-frame">
-              <!-- Replace with: <img src="roads/road2.jpg" alt="On the Hike"> -->
-               <img src="photo_Wandern.jpeg" alt="On the Hike">
+              <img src="photo_Wandern.jpeg" alt="On the Hike">
               <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €320</button>
-                <button class="overlay-btn">Print</button>
+                <span class="overlay-zoom">View</span>
               </div>
             </div>
             <div class="painting-title">On the Hike</div>
             <div class="painting-meta">
               <span class="painting-info-text">oil · 25×30 cm · 2026</span>
-              <span class="painting-price">€ 320</span>
             </div>
           </div>
 
           <div class="painting-card">
             <div class="painting-frame">
-              <!-- Replace with: <img src="roads/road3.jpg" alt="In my Garden"> -->
-             <img src="photo_Garten.jpeg" alt="In my garden">
+              <img src="photo_Garten.jpeg" alt="In my garden">
               <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €350</button>
-                <button class="overlay-btn">Print</button>
+                <span class="overlay-zoom">View</span>
               </div>
             </div>
             <div class="painting-title">In my Garden</div>
             <div class="painting-meta">
               <span class="painting-info-text">oil · 25×30 cm · 2026</span>
-              <span class="painting-price">€ 350</span>
             </div>
           </div>
 
           <div class="painting-card">
             <div class="painting-frame">
-              <!-- Replace with: <img src="roads/road4.jpg" alt="Winter Road"> -->
               <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
                 <rect width="320" height="240" fill="#e8eef2"/>
                 <rect width="320" height="110" fill="#f0f4f8"/>
@@ -748,14 +712,12 @@
                 <rect y="175" width="320" height="65" fill="#ccd8e0"/>
               </svg>
               <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €290</button>
-                <button class="overlay-btn">Print</button>
+                <span class="overlay-zoom">View</span>
               </div>
             </div>
             <div class="painting-title">Winter Road</div>
             <div class="painting-meta">
               <span class="painting-info-text">oil · 40×50 cm · 2025</span>
-              <span class="painting-price">€ 290</span>
             </div>
           </div>
 
@@ -780,109 +742,81 @@
 
           <div class="painting-card">
             <div class="painting-frame">
-              <img src="photo_Purple_Robin.jpg" alt="Purple Robin"> 
-              <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €300</button>
-                <button class="overlay-btn">Print</button>
-              </div>
+              <img src="photo_Purple_Robin.jpg" alt="Purple Robin">
+              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
             </div>
             <div class="painting-title">Purple Robin</div>
             <div class="painting-meta">
               <span class="painting-info-text">oil · 20×20 cm · 2025</span>
-              <span class="painting-price">€ 300</span>
             </div>
           </div>
 
           <div class="painting-card">
             <div class="painting-frame">
-              <img src="photo_Zaunkoenig.jpg" alt="Wren"> 
-              <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €300</button>
-                <button class="overlay-btn">Print</button>
-              </div>
+              <img src="photo_Zaunkoenig.jpg" alt="Wren">
+              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
             </div>
             <div class="painting-title">Wren</div>
             <div class="painting-meta">
               <span class="painting-info-text">oil · 20×20 cm · 2025</span>
-              <span class="painting-price">€ 300</span>
             </div>
           </div>
 
           <div class="painting-card">
             <div class="painting-frame">
-              <img src="photo_Sperling.jpg" alt="Sparrow on a branch"> 
-              <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €300</button>
-                <button class="overlay-btn">Print</button>
-              </div>
+              <img src="photo_Sperling.jpg" alt="Sparrow on a branch">
+              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
             </div>
             <div class="painting-title">Sparrow on a branch</div>
             <div class="painting-meta">
               <span class="painting-info-text">oil · 20×20 cm · 2025</span>
-              <span class="painting-price">€ 300</span>
-            </div>
-          </div>
-
-           <div class="painting-card">
-            <div class="painting-frame">
-              <img src="photo_Robin.jpg" alt="Robin"> 
-              <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €300</button>
-                <button class="overlay-btn">Print</button>
-              </div>
-            </div>
-            <div class="painting-title">Robin</div>
-            <div class="painting-meta">
-              <span class="painting-info-text">acrylic · 20×20 cm · 2025</span>
-              <span class="painting-price">€ 300</span>
-            </div>
-          </div>
-
-           <div class="painting-card">
-            <div class="painting-frame">
-              <img src="photo_Chaffinch.jpg" alt="Chaffinch"> 
-              <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €300</button>
-                <button class="overlay-btn">Print</button>
-              </div>
-            </div>
-            <div class="painting-title">Chaffinch</div>
-            <div class="painting-meta">
-              <span class="painting-info-text">acrylic · 20×20 cm · 2025</span>
-              <span class="painting-price">€ 300</span>
             </div>
           </div>
 
           <div class="painting-card">
             <div class="painting-frame">
-              <img src="photo_Kingfisher.jpg" alt="Kingfisher"> 
-              <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €300</button>
-                <button class="overlay-btn">Print</button>
-              </div>
+              <img src="photo_Robin.jpg" alt="Robin">
+              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+            </div>
+            <div class="painting-title">Robin</div>
+            <div class="painting-meta">
+              <span class="painting-info-text">acrylic · 20×20 cm · 2025</span>
+            </div>
+          </div>
+
+          <div class="painting-card">
+            <div class="painting-frame">
+              <img src="photo_Chaffinch.jpg" alt="Chaffinch">
+              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+            </div>
+            <div class="painting-title">Chaffinch</div>
+            <div class="painting-meta">
+              <span class="painting-info-text">acrylic · 20×20 cm · 2025</span>
+            </div>
+          </div>
+
+          <div class="painting-card">
+            <div class="painting-frame">
+              <img src="photo_Kingfisher.jpg" alt="Kingfisher">
+              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
             </div>
             <div class="painting-title">Kingfisher</div>
             <div class="painting-meta">
               <span class="painting-info-text">acrylic · 20×20 cm · 2025</span>
-              <span class="painting-price">€ 300</span>
             </div>
           </div>
 
-           <div class="painting-card">
+          <div class="painting-card">
             <div class="painting-frame">
-              <img src="photo_Sparrow.jpg" alt="Sparrow in Spring"> 
-              <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €300</button>
-                <button class="overlay-btn">Print</button>
-              </div>
+              <img src="photo_Sparrow.jpg" alt="Sparrow in Spring">
+              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
             </div>
             <div class="painting-title">Sparrow in Spring</div>
             <div class="painting-meta">
               <span class="painting-info-text">acrylic · 20×20 cm · 2025</span>
-              <span class="painting-price">€ 300</span>
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -904,37 +838,28 @@
 
           <div class="painting-card">
             <div class="painting-frame">
-           <img src="photo_Fox.jpg" alt="Fox"> 
-              <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €300</button>
-                <button class="overlay-btn">Print</button>
-              </div>
+              <img src="photo_Fox.jpg" alt="Fox">
+              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
             </div>
             <div class="painting-title">Fox Portrait</div>
             <div class="painting-meta">
               <span class="painting-info-text">oil · 20×20 cm · 2026</span>
-              <span class="painting-price">€ 300</span>
             </div>
           </div>
 
           <div class="painting-card">
             <div class="painting-frame">
-              <img src="photo_Cat.JPG" alt="A rainy day"> 
-              <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €500</button>
-                <button class="overlay-btn">Print</button>
-              </div>
+              <img src="photo_Cat.JPG" alt="A rainy day">
+              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
             </div>
             <div class="painting-title">A rainy day</div>
             <div class="painting-meta">
               <span class="painting-info-text">oil · 30×30 cm · 2022</span>
-              <span class="painting-price">€ 500</span>
             </div>
           </div>
 
           <div class="painting-card">
             <div class="painting-frame">
-              <!-- Replace with: <img src="animals/animal3.jpg" alt="Cat"> -->
               <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
                 <rect width="320" height="240" fill="#f0ece0"/>
                 <ellipse cx="160" cy="130" rx="50" ry="35" fill="#d0c0a0"/>
@@ -952,15 +877,11 @@
                 <path d="M145,118 Q138,123 130,122" stroke="#9a9080" stroke-width="1.5" fill="none"/>
                 <path d="M175,115 Q180,120 188,118" stroke="#9a9080" stroke-width="1.5" fill="none"/>
               </svg>
-              <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €220</button>
-                <button class="overlay-btn">Print</button>
-              </div>
+              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
             </div>
             <div class="painting-title">Sleeping Cat</div>
             <div class="painting-meta">
               <span class="painting-info-text">oil · 30×35 cm · 2023</span>
-              <span class="painting-price">€ 220</span>
             </div>
           </div>
 
@@ -985,7 +906,6 @@
 
           <div class="painting-card">
             <div class="painting-frame">
-              <!-- Replace with: <img src="children/child1.jpg" alt="Reading"> -->
               <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
                 <rect width="320" height="240" fill="#f0e8d8"/>
                 <rect x="80" y="80" width="160" height="160" fill="#e8dcc8" opacity="0.5"/>
@@ -999,21 +919,16 @@
                 <circle cx="167" cy="89" r="3.5" fill="#3a2818"/>
                 <ellipse cx="160" cy="98" rx="6" ry="4" fill="#e0b090"/>
               </svg>
-              <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €340</button>
-                <button class="overlay-btn">Print</button>
-              </div>
+              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
             </div>
             <div class="painting-title">Reading</div>
             <div class="painting-meta">
               <span class="painting-info-text">oil · 45×55 cm · 2024</span>
-              <span class="painting-price">€ 340</span>
             </div>
           </div>
 
           <div class="painting-card">
             <div class="painting-frame">
-              <!-- Replace with: <img src="children/child2.jpg" alt="At the Window"> -->
               <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
                 <rect width="320" height="240" fill="#d8c8a8"/>
                 <rect x="80" y="20" width="160" height="200" fill="#e8e0d0" opacity="0.6"/>
@@ -1027,21 +942,16 @@
                 <rect x="130" y="190" width="18" height="32" fill="#c09050" opacity="0.7" rx="3"/>
                 <rect x="172" y="190" width="18" height="32" fill="#c09050" opacity="0.7" rx="3"/>
               </svg>
-              <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €360</button>
-                <button class="overlay-btn">Print</button>
-              </div>
+              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
             </div>
             <div class="painting-title">At the Window</div>
             <div class="painting-meta">
               <span class="painting-info-text">oil · 50×60 cm · 2025</span>
-              <span class="painting-price">€ 360</span>
             </div>
           </div>
 
           <div class="painting-card">
             <div class="painting-frame">
-              <!-- Replace with: <img src="children/child3.jpg" alt="Summer Morning"> -->
               <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
                 <rect width="320" height="240" fill="#d8e8c8"/>
                 <rect width="320" height="110" fill="#c8e0f0" opacity="0.6"/>
@@ -1055,15 +965,11 @@
                 <ellipse cx="160" cy="136" rx="14" ry="18" fill="#e0b890"/>
                 <ellipse cx="140" cy="115" rx="15" ry="12" fill="#d8c090" opacity="0.7"/>
               </svg>
-              <div class="painting-overlay">
-                <button class="overlay-btn buy">Buy · €300</button>
-                <button class="overlay-btn">Print</button>
-              </div>
+              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
             </div>
             <div class="painting-title">Summer Morning</div>
             <div class="painting-meta">
               <span class="painting-info-text">oil · 40×50 cm · 2024</span>
-              <span class="painting-price">€ 300</span>
             </div>
           </div>
 
@@ -1074,55 +980,51 @@
   </div>
 </section>
 
-<!-- PRINTS -->
-<section class="prints-section" id="prints">
-  <div class="prints-inner">
-    <div class="prints-text">
-      <h2>Prints for<br>the world</h2>
-      <p>All works are available as high-quality prints — posters, canvas, postcards. Printing and shipping are handled by partner platforms, no action required on my end.</p>
-      <div class="prints-links">
-        <a href="https://www.redbubble.com" target="_blank" class="print-link">
-          <div>
-            <div class="print-link-name">Redbubble</div>
-            <div class="print-link-desc">Posters, cards, mugs, clothing</div>
-          </div>
-          <span class="print-link-arrow">→</span>
-        </a>
-        <a href="https://www.saatchiart.com" target="_blank" class="print-link">
-          <div>
-            <div class="print-link-name">Saatchi Art</div>
-            <div class="print-link-desc">Canvas prints, original works</div>
-          </div>
-          <span class="print-link-arrow">→</span>
-        </a>
-        <a href="https://www.society6.com" target="_blank" class="print-link">
-          <div>
-            <div class="print-link-name">Society6</div>
-            <div class="print-link-desc">Interior prints, home goods</div>
-          </div>
-          <span class="print-link-arrow">→</span>
-        </a>
-      </div>
+<!-- PLATFORMS / PRINTS -->
+<section class="platforms-section" id="prints">
+  <div class="platforms-inner">
+    <div class="platforms-header">
+      <h2 class="platforms-title">Find my work on</h2>
+      <span class="platforms-sub">Prints &amp; originals worldwide</span>
     </div>
-    <div class="prints-visual">
-      <div class="print-thumb">
-        <svg viewBox="0 0 160 213" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <rect width="160" height="213" fill="#e8c97a"/>
-          <circle cx="80" cy="70" r="30" fill="#e8892a" opacity="0.9"/>
-          <rect y="110" width="160" height="103" fill="#c8a24a"/>
-          <rect x="20" y="115" width="4" height="98" fill="#7a5a2a"/>
-          <ellipse cx="22" cy="108" rx="16" ry="20" fill="#5a8030"/>
+    <div class="platforms-links">
+
+      <!-- Artmajeur -->
+      <a href="https://www.artmajeur.com" target="_blank" class="platform-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="0.8"/>
+          <path d="M5 11L8 5l3 6" stroke="currentColor" stroke-width="0.8" stroke-linejoin="round"/>
+          <path d="M6 9h4" stroke="currentColor" stroke-width="0.8"/>
         </svg>
-      </div>
-      <div class="print-thumb">
-        <svg viewBox="0 0 160 213" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <rect width="160" height="213" fill="#b8d4e8"/>
-          <rect y="105" width="160" height="108" fill="#4a7c3f"/>
-          <ellipse cx="40" cy="100" rx="40" ry="28" fill="#2d5a25"/>
-          <ellipse cx="130" cy="95" rx="45" ry="32" fill="#3a6e30"/>
-          <circle cx="115" cy="35" r="20" fill="#f5e88a" opacity="0.9"/>
+        Artmajeur
+      </a>
+
+      <!-- Saatchi Art -->
+      <a href="https://www.saatchiart.com" target="_blank" class="platform-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="12" height="12" rx="1" stroke="currentColor" stroke-width="0.8"/>
+          <path d="M5 11 Q8 5 11 11" stroke="currentColor" stroke-width="0.8" fill="none"/>
         </svg>
-      </div>
+        Saatchi Art
+      </a>
+
+      <!-- Redbubble -->
+      <a href="https://www.redbubble.com" target="_blank" class="platform-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="0.8"/>
+          <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="0.8"/>
+        </svg>
+        Redbubble
+      </a>
+
+      <!-- Society6 -->
+      <a href="https://www.society6.com" target="_blank" class="platform-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 10 Q3 5 8 5 Q13 5 13 8 Q13 11 8 11 Q5 11 4 13" stroke="currentColor" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+        </svg>
+        Society6
+      </a>
+
     </div>
   </div>
 </section>
@@ -1165,7 +1067,7 @@
   </form>
 </section>
 
-  <!-- LIGHTBOX -->
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
   <div class="lightbox-inner">
     <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
@@ -1174,15 +1076,19 @@
       <div class="lightbox-title" id="lightbox-title"></div>
       <div class="lightbox-meta" id="lightbox-meta"></div>
       <div class="lightbox-actions">
-        <button class="lightbox-btn buy" id="lightbox-buy"></button>
         <button class="lightbox-btn" onclick="closeLightbox()">Close</button>
       </div>
     </div>
   </div>
 </div>
-  
+
 <footer>
-  <span>© All rights to the materials presented on this website belong to NAHO (Natalya Holzwarth), the owner of this site's content—including all legal rights protected as intellectual property, copyrights, distribution rights, and any other proprietary rights. Any use of the presented materials—including for commercial purposes, through printing, reproduction, and/or publication in any other media (whether in written or electronic form)—is prohibited without the prior written consent of Naho.</span>
+  <div class="footer-copyright">
+    © All rights to the materials presented on this website belong to NAHO (Natalya Holzwarth).<br>
+    Any use of the presented materials including for commercial purposes, through printing, reproduction,<br>
+    and/or publication in any other media is prohibited without the prior written consent of NAHO.
+  </div>
+  <div class="footer-logo">NAHO</div>
 </footer>
 
 <script>
@@ -1197,8 +1103,6 @@ function openLightbox(card) {
   const frame  = card.querySelector('.painting-frame');
   const title  = card.querySelector('.painting-title').textContent;
   const meta   = card.querySelector('.painting-info-text').textContent;
-  const buyBtn = card.querySelector('.overlay-btn.buy');
-  const buyText = buyBtn ? buyBtn.textContent : '';
 
   const mediaEl = frame.querySelector('img') || frame.querySelector('svg');
   const clone = mediaEl.cloneNode(true);
@@ -1213,13 +1117,6 @@ function openLightbox(card) {
   document.getElementById('lightbox-media').appendChild(clone);
   document.getElementById('lightbox-title').textContent = title;
   document.getElementById('lightbox-meta').textContent  = meta;
-  const price = card.querySelector('.painting-price').textContent.trim();
-  const subject = encodeURIComponent('Purchase inquiry: ' + title);
-  const body = encodeURIComponent('Hello,\n\nI am interested in purchasing the painting "' + title + '" (' + meta + '), price: ' + price + '.\n\nPlease let me know the next steps.\n\nBest regards,');
-  document.getElementById('lightbox-buy').textContent = buyText;
-  document.getElementById('lightbox-buy').onclick = function() {
-  window.location.href = 'mailto:na.ho.art@web.de?subject=' + subject + '&body=' + body;
-};
 
   document.getElementById('lightbox').classList.add('active');
   document.body.style.overflow = 'hidden';
@@ -1258,3 +1155,5 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 </script>
+</body>
+</html>
