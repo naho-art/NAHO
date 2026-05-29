@@ -845,11 +845,13 @@
     <h2>A question<br>or commission?</h2>
     <p>Write to me — I reply within 24 hours. Custom commissions are available upon request.</p>
   </div>
-  <form class="contact-form" onsubmit="handleSubmit(event)">
+  <form class="contact-form" action="https://formspree.io/f/mojbbvkj" method="POST">
     <input type="text" placeholder="Your name" required>
     <input type="email" placeholder="Email" required>
     <textarea placeholder="Message"></textarea>
-    <button type="submit" class="contact-submit">Send →</button>
+   <input type="hidden" name="_replyto" value="naho.art.eu@gmail.com">
+<input type="hidden" name="_subject" value="New message from NAHO website">
+<button type="submit" class="contact-submit">Send →</button>
   </form>
 </section>
 
@@ -922,12 +924,6 @@ document.addEventListener('DOMContentLoaded', () => {
     card.querySelector('.painting-frame').addEventListener('click', () => openLightbox(card));
   });
 });
-
-function handleSubmit(e) {
-  e.preventDefault();
-  alert('Thank you! Message sent. I will reply within 24 hours.');
-  e.target.reset();
-}
 
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
