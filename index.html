@@ -399,14 +399,9 @@
   .platform-icon-link.platform-icon-full img { width: 48px; height: 48px; border-radius: 50%; }
 
   /* ── ABOUT ── */
-  .about-section {
-    padding: 5rem 3rem;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 5rem;
-    align-items: start;
-    border-top: 0.5px solid var(--border);
-  }
+ .about-section {
+  border-top: 0.5px solid var(--border);
+}
   .about-label {
     font-size: 0.65rem;
     letter-spacing: 0.18em;
@@ -805,7 +800,7 @@
   </div>
 </section>
 
-<!-- PLATFORMS / PRINTS -->
+<!-- PLATFORMS / PRINTS 
 <section class="platforms-section" id="prints">
   <div class="platforms-inner">
     <div class="platforms-icons">
@@ -823,32 +818,30 @@
       </a>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- ABOUT -->
 <section class="about-section" id="about">
-  <div class="about-label">About</div>
-  <div class="about-content">
+  <div style="padding:1.5rem 3rem; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleAbout()">
+    <span style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--muted); letter-spacing:0.2em;">ABOUT</span>
+    <span id="about-toggle" style="font-size:1rem; color:var(--muted); transition:transform 0.35s ease;">+</span>
+  </div>
 
-    <!-- круглый аватар — замените SVG на <img src="ваше_фото.jpg" ...> -->
-    <div class="about-avatar">
-       <img src="photo_Avator.jpeg" alt="NAHO">
-    </div>
-
-    <h2>Artist NAHO</h2>
-    <p>Hello! My name is NAHO, and I am a painter based in Baden-Württemberg, Germany.
-
-Through my art, I strive to notice the beauty in everyday life — to capture fleeting moments and preserve their atmosphere on canvas. I draw inspiration from the natural world around me: animals, plants, and landscapes all become a source of emotion and reflection in my work. Painting is my way of expressing love and appreciation for the world we live in.
-
-I mainly work with oil and acrylic on canvas, although I enjoy experimenting with new materials and techniques from time to time. Each painting carries a small part of my personal journey, and I am truly grateful that my work resonates with others.
-
-Thank you for your interest in my art. I hope that one day at least one of my paintings will find a special place in your home.</p>
-    <p>Every original exists as a single unique piece — one painting, one owner.</p>
-    <div class="about-stats">
+  <div id="about-content" style="display:none; padding:2rem 3rem 4rem;">
+    <div style="display:grid; grid-template-columns:1fr 2fr; gap:5rem; align-items:start;">
+      <div class="about-label">About</div>
+      <div>
+        <div class="about-avatar">
+          <img src="photo_Avator.jpeg" alt="NAHO">
+        </div>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; margin-bottom:1.25rem;">Artist NAHO</h2>
+        <p style="font-size:0.88rem; line-height:1.9; color:var(--muted); margin-bottom:1rem; max-width:540px;">Hello! My name is NAHO, and I am a painter based in Baden-Württemberg, Germany. Through my art, I strive to notice the beauty in everyday life — to capture fleeting moments and preserve their atmosphere on canvas. I draw inspiration from the natural world around me: animals, plants, and landscapes all become a source of emotion and reflection in my work. Painting is my way of expressing love and appreciation for the world we live in. I mainly work with oil and acrylic on canvas, although I enjoy experimenting with new materials and techniques from time to time. Each painting carries a small part of my personal journey, and I am truly grateful that my work resonates with others. Thank you for your interest in my art. I hope that one day at least one of my paintings will find a special place in your home.</p>
+        <p style="font-size:0.88rem; line-height:1.9; color:var(--muted); max-width:540px;">Every original exists as a single unique piece — one painting, one owner.</p>
+      </div>
     </div>
   </div>
 </section>
-
+  
 <!-- CONTACT -->
 <section id="contact" style="background:#1a1814; border-top:0.5px solid rgba(250,248,244,0.1);">
   <div style="padding:1.5rem 3rem; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleContact()">
@@ -962,6 +955,14 @@ function closeLightboxBg(e) {
   if (e.target === document.getElementById('lightbox')) closeLightbox();
 }
 
+  function toggleAbout() {
+  const content = document.getElementById('about-content');
+  const toggle  = document.getElementById('about-toggle');
+  const isOpen  = content.style.display === 'block';
+  content.style.display = isOpen ? 'none' : 'block';
+  toggle.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg)';
+}
+  
 function toggleContact() {
   const content = document.getElementById('contact-content');
   const toggle  = document.getElementById('contact-toggle');
