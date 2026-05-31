@@ -144,13 +144,41 @@
   }
   .hero-caption span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.06em; }
 
-  .gallery-section { padding: 4rem 3rem; }
+  /* ── ACCORDION SECTIONS (all 4 same style) ── */
+  .accordion-section {
+    border-top: 0.5px solid var(--border);
+    background: var(--warm-white);
+  }
+  .accordion-header {
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  .accordion-header:hover .accordion-label { color: var(--ink); }
+  .accordion-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    transition: color 0.2s;
+  }
+  .accordion-toggle {
+    font-size: 1rem;
+    color: var(--muted);
+    transition: transform 0.35s ease;
+  }
+
+  /* ── PORTFOLIO (formerly gallery-section) ── */
+  .portfolio-inner { padding: 0 3rem 4rem; }
 
   .section-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     margin-bottom: 3rem;
+    padding-top: 2rem;
   }
   .section-title {
     font-family: 'Cormorant Garamond', serif;
@@ -373,35 +401,8 @@
   .painting-meta { display: flex; justify-content: space-between; align-items: center; }
   .painting-info-text { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.04em; }
 
-  .platforms-section {
-    background: var(--cream);
-    padding: 2.5rem 3rem;
-    border-top: 0.5px solid var(--border);
-  }
-  .platforms-inner { display: flex; flex-direction: column; gap: 0; }
-  .platforms-icons { display: flex; gap: 20px; align-items: center; }
-  .platform-icon-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: #fff;
-    border: 0.5px solid var(--border);
-    overflow: hidden;
-    transition: opacity 0.2s, transform 0.2s;
-    text-decoration: none;
-  }
-  .platform-icon-link:hover { opacity: 0.75; transform: scale(1.06); }
-  .platform-icon-link img { width: 32px; height: 32px; object-fit: contain; }
-  .platform-icon-link.platform-icon-full { background: transparent; border: none; }
-  .platform-icon-link.platform-icon-full img { width: 48px; height: 48px; border-radius: 50%; }
-
-  /* ── ABOUT ── */
- .about-section {
-  border-top: 0.5px solid var(--border);
-}
+  /* ── ABOUT inner ── */
+  .about-inner { padding: 0 3rem 4rem; }
   .about-label {
     font-size: 0.65rem;
     letter-spacing: 0.18em;
@@ -422,22 +423,7 @@
     margin-bottom: 1rem;
     max-width: 540px;
   }
-  .about-stats {
-    display: flex;
-    gap: 3rem;
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 0.5px solid var(--border);
-  }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 300;
-    line-height: 1;
-  }
-  .stat-label { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; margin-top: 4px; }
 
-  /* artist avatar — круглое фото, без увеличения */
   .about-avatar {
     width: 120px;
     height: 120px;
@@ -456,29 +442,29 @@
     display: block;
   }
 
-  .contact-section {
-    background: var(--ink);
-    color: var(--warm-white);
-    padding: 5rem 3rem;
+  /* ── CONTACT inner ── */
+  .contact-inner {
+    padding: 0 3rem 4rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
   }
-  .contact-section h2 {
+  .contact-inner h2 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 2.5rem;
     font-weight: 300;
     line-height: 1.2;
     margin-bottom: 1rem;
+    color: var(--ink);
   }
-  .contact-section p { font-size: 0.85rem; line-height: 1.85; color: rgba(250,248,244,0.6); }
+  .contact-inner p { font-size: 0.85rem; line-height: 1.85; color: var(--muted); }
   .contact-form { display: flex; flex-direction: column; gap: 1rem; }
   .contact-form input,
   .contact-form textarea {
-    background: rgba(250,248,244,0.07);
-    border: 0.5px solid rgba(250,248,244,0.2);
-    color: var(--warm-white);
+    background: rgba(26,24,20,0.04);
+    border: 0.5px solid var(--border);
+    color: var(--ink);
     font-family: 'Jost', sans-serif;
     font-weight: 300;
     font-size: 0.85rem;
@@ -488,9 +474,9 @@
     resize: none;
   }
   .contact-form input::placeholder,
-  .contact-form textarea::placeholder { color: rgba(250,248,244,0.35); }
+  .contact-form textarea::placeholder { color: var(--muted); opacity: 0.6; }
   .contact-form input:focus,
-  .contact-form textarea:focus { border-color: rgba(250,248,244,0.5); }
+  .contact-form textarea:focus { border-color: rgba(26,24,20,0.4); }
   .contact-form textarea { height: 110px; }
   .contact-submit {
     font-family: 'Jost', sans-serif;
@@ -498,19 +484,37 @@
     font-size: 0.72rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--ink);
-    background: var(--warm-white);
+    color: var(--warm-white);
+    background: var(--ink);
     border: none;
     padding: 0.9rem 2rem;
     cursor: pointer;
     align-self: flex-start;
     transition: background 0.2s;
   }
-  .contact-submit:hover { background: var(--cream); }
+  .contact-submit:hover { background: var(--accent); }
+
+  /* ── IMPRESSUM inner ── */
+  .impressum-inner {
+    padding: 0 3rem 2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    line-height: 1.9;
+    color: var(--muted);
+  }
+  .impressum-inner strong { color: var(--ink); }
+  .impressum-copy {
+    color: var(--muted);
+    opacity: 0.6;
+    margin-top: 1rem;
+    font-size: 0.72rem;
+    border-top: 0.5px solid var(--border);
+    padding-top: 1rem;
+  }
 
   footer {
-    background: var(--ink);
-    border-top: 0.5px solid rgba(250,248,244,0.1);
+    background: var(--warm-white);
+    border-top: 0.5px solid var(--border);
     padding: 1.5rem 3rem;
     display: flex;
     justify-content: space-between;
@@ -518,14 +522,15 @@
   }
   .footer-copyright {
     font-size: 0.58rem;
-    color: rgba(250,248,244,0.25);
+    color: var(--muted);
+    opacity: 0.5;
     letter-spacing: 0.04em;
     line-height: 1.6;
   }
   .footer-logo {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1rem;
-    color: rgba(250,248,244,0.5);
+    color: var(--muted);
     letter-spacing: 0.2em;
   }
 
@@ -544,9 +549,11 @@
     .hero { grid-template-columns: 1fr; min-height: auto; }
     .hero-left { padding: 6rem 1.5rem 3rem; border-right: none; border-bottom: 0.5px solid var(--border); }
     .hero-right { height: 60vw; }
-    .gallery-section, .platforms-section, .about-section { padding: 3rem 1.5rem; }
-    .about-section { grid-template-columns: 1fr; gap: 1.5rem; }
-    .contact-section { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
+    .accordion-header { padding: 1.2rem 1.5rem; }
+    .portfolio-inner,
+    .about-inner,
+    .impressum-inner { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; padding: 0 1.5rem 3rem; }
     footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
     .series-desc { padding-left: 0; }
     .paintings-grid { grid-template-columns: repeat(2, 1fr); }
@@ -567,7 +574,6 @@
     <li><a href="#about">About</a></li>
     <li><a href="#gallery">Portfolio</a></li>
     <li><a href="#contact">Contact</a></li>
-  <!--   <li><a href="#impressum">Impressum</a></li>  -->
   </ul>
 </nav>
 
@@ -576,7 +582,7 @@
   <div class="hero-left">
     <p class="hero-eyebrow">Oil and Acrylic Painting</p>
     <h1 class="hero-title">The Beautiful<br><em>in</em><br>the Everyday</h1>
-    <p class="hero-desc">Every painting is a captured moment of life.<br><!-- Original works and prints available worldwide. --></p>
+    <p class="hero-desc">Every painting is a captured moment of life.<br></p>
     <a href="#gallery" class="hero-cta">
       View works
       <svg width="16" height="8" viewBox="0 0 16 8" fill="none">
@@ -586,274 +592,257 @@
   </div>
   <div class="hero-right">
     <img class="hero-painting-svg" src="photo_Garten.jpeg" alt="NAHO painting">
-    <!-- <div class="hero-caption">
-      <strong>In my Garden</strong>
-      <span>oil · 25×30 cm · 2026</span>
-    </div> -->
   </div>
 </section>
 
-<!-- GALLERY — SERIES -->
-<section class="gallery-section" id="gallery">
-  <div class="section-header">
-    <h2 class="section-title">Series</h2>
-    <span class="section-subtitle">Click a series to explore</span>
+<!-- PORTFOLIO -->
+<section class="accordion-section" id="gallery">
+  <div class="accordion-header" onclick="toggleAccordion('portfolio')">
+    <span class="accordion-label">PORTFOLIO</span>
+    <span class="accordion-toggle" id="portfolio-toggle">+</span>
   </div>
-
-  <div class="series-list">
-
-    <div class="series-item" id="series-paths">
-      <div class="series-header" onclick="toggleSeries('series-paths')">
-        <div class="series-left">
-          <span class="series-number">01</span>
-          <span class="series-name">Paths</span>
-          <span class="series-tag">Landscape</span>
-        </div>
-        <span class="series-meta">4 works</span>
-        <div class="series-toggle"><span class="toggle-icon">+</span></div>
+  <div id="portfolio-content" style="display:none;">
+    <div class="portfolio-inner">
+      <div class="section-header">
+        <h2 class="section-title">Series</h2>
+        <span class="section-subtitle">Click a series to explore</span>
       </div>
-      <div class="series-panel">
-        <p class="series-desc">The roads I had to travel were as diverse as the goals to which they led.</p>
-        <div class="paintings-grid">
-          <div class="painting-card">
-            <div class="painting-frame">
-              <img src="photo_Sity.jpeg" alt="In the City">
-              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+
+      <div class="series-list">
+
+        <div class="series-item" id="series-paths">
+          <div class="series-header" onclick="toggleSeries('series-paths')">
+            <div class="series-left">
+              <span class="series-number">01</span>
+              <span class="series-name">Paths</span>
+              <span class="series-tag">Landscape</span>
             </div>
-            <div class="painting-title">City Road</div>
-            <div class="painting-meta"><span class="painting-info-text">oil · 25×30 cm · 2026</span></div>
+            <span class="series-meta">4 works</span>
+            <div class="series-toggle"><span class="toggle-icon">+</span></div>
           </div>
-          <div class="painting-card">
-            <div class="painting-frame">
-              <img src="photo_Wandern.jpeg" alt="On the Hike">
-              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+          <div class="series-panel">
+            <p class="series-desc">The roads I had to travel were as diverse as the goals to which they led.</p>
+            <div class="paintings-grid">
+              <div class="painting-card">
+                <div class="painting-frame">
+                  <img src="photo_Sity.jpeg" alt="In the City">
+                  <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+                </div>
+                <div class="painting-title">City Road</div>
+                <div class="painting-meta"><span class="painting-info-text">oil · 25×30 cm · 2026</span></div>
+              </div>
+              <div class="painting-card">
+                <div class="painting-frame">
+                  <img src="photo_Wandern.jpeg" alt="On the Hike">
+                  <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+                </div>
+                <div class="painting-title">On the Hike</div>
+                <div class="painting-meta"><span class="painting-info-text">oil · 25×30 cm · 2026</span></div>
+              </div>
+              <div class="painting-card">
+                <div class="painting-frame">
+                  <img src="photo_Garten.jpeg" alt="In my garden">
+                  <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+                </div>
+                <div class="painting-title">In my Garden</div>
+                <div class="painting-meta"><span class="painting-info-text">oil · 25×30 cm · 2026</span></div>
+              </div>
+              <div class="painting-card">
+                <div class="painting-frame">
+                  <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                    <rect width="320" height="240" fill="#e8eef2"/>
+                    <rect width="320" height="110" fill="#f0f4f8"/>
+                    <ellipse cx="160" cy="60" rx="110" ry="50" fill="#dce8f0" opacity="0.7"/>
+                    <rect y="130" width="320" height="110" fill="#d8e4ec"/>
+                    <polygon points="125,240 195,240 182,130 138,130" fill="#c8d4dc"/>
+                    <rect x="30" y="120" width="18" height="120" fill="#8a9898" opacity="0.4"/>
+                    <ellipse cx="39" cy="118" rx="12" ry="16" fill="#9aaa9a" opacity="0.5"/>
+                    <rect x="272" y="115" width="18" height="125" fill="#8a9898" opacity="0.4"/>
+                    <ellipse cx="281" cy="113" rx="14" ry="18" fill="#9aaa9a" opacity="0.5"/>
+                    <rect y="175" width="320" height="65" fill="#ccd8e0"/>
+                  </svg>
+                  <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+                </div>
+                <div class="painting-title">Winter Road</div>
+                <div class="painting-meta"><span class="painting-info-text">oil · 40×50 cm · 2025</span></div>
+              </div>
             </div>
-            <div class="painting-title">On the Hike</div>
-            <div class="painting-meta"><span class="painting-info-text">oil · 25×30 cm · 2026</span></div>
-          </div>
-          <div class="painting-card">
-            <div class="painting-frame">
-              <img src="photo_Garten.jpeg" alt="In my garden">
-              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
-            </div>
-            <div class="painting-title">In my Garden</div>
-            <div class="painting-meta"><span class="painting-info-text">oil · 25×30 cm · 2026</span></div>
-          </div>
-          <div class="painting-card">
-            <div class="painting-frame">
-              <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                <rect width="320" height="240" fill="#e8eef2"/>
-                <rect width="320" height="110" fill="#f0f4f8"/>
-                <ellipse cx="160" cy="60" rx="110" ry="50" fill="#dce8f0" opacity="0.7"/>
-                <rect y="130" width="320" height="110" fill="#d8e4ec"/>
-                <polygon points="125,240 195,240 182,130 138,130" fill="#c8d4dc"/>
-                <rect x="30" y="120" width="18" height="120" fill="#8a9898" opacity="0.4"/>
-                <ellipse cx="39" cy="118" rx="12" ry="16" fill="#9aaa9a" opacity="0.5"/>
-                <rect x="272" y="115" width="18" height="125" fill="#8a9898" opacity="0.4"/>
-                <ellipse cx="281" cy="113" rx="14" ry="18" fill="#9aaa9a" opacity="0.5"/>
-                <rect y="175" width="320" height="65" fill="#ccd8e0"/>
-              </svg>
-              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
-            </div>
-            <div class="painting-title">Winter Road</div>
-            <div class="painting-meta"><span class="painting-info-text">oil · 40×50 cm · 2025</span></div>
           </div>
         </div>
+
+        <div class="series-item" id="series-birds">
+          <div class="series-header" onclick="toggleSeries('series-birds')">
+            <div class="series-left">
+              <span class="series-number">02</span>
+              <span class="series-name">Birds</span>
+              <span class="series-tag">Wildlife</span>
+            </div>
+            <span class="series-meta">3 works</span>
+            <div class="series-toggle"><span class="toggle-icon">+</span></div>
+          </div>
+          <div class="series-panel">
+            <p class="series-desc">In this series, I explore the beauty and individuality of birds, striving to convey both their grace and their emotional presence in nature.</p>
+            <div class="paintings-grid">
+              <div class="painting-card">
+                <div class="painting-frame">
+                  <img src="photo_Purple_Robin.jpg" alt="Purple Robin">
+                  <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+                </div>
+                <div class="painting-title">Purple Robin</div>
+                <div class="painting-meta"><span class="painting-info-text">oil · 20×20 cm · 2025</span></div>
+              </div>
+              <div class="painting-card">
+                <div class="painting-frame">
+                  <img src="photo_Zaunkoenig.jpg" alt="Wren">
+                  <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+                </div>
+                <div class="painting-title">Wren</div>
+                <div class="painting-meta"><span class="painting-info-text">oil · 20×20 cm · 2025</span></div>
+              </div>
+              <div class="painting-card">
+                <div class="painting-frame">
+                  <img src="photo_Sperling.jpg" alt="Sparrow on a branch">
+                  <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+                </div>
+                <div class="painting-title">Sparrow on a branch</div>
+                <div class="painting-meta"><span class="painting-info-text">oil · 20×20 cm · 2025</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="series-item" id="series-animals">
+          <div class="series-header" onclick="toggleSeries('series-animals')">
+            <div class="series-left">
+              <span class="series-number">03</span>
+              <span class="series-name">Animals</span>
+              <span class="series-tag">Wildlife</span>
+            </div>
+            <span class="series-meta">3 works</span>
+            <div class="series-toggle"><span class="toggle-icon">+</span></div>
+          </div>
+          <div class="series-panel">
+            <p class="series-desc">In this series, I explore the wild beauty and spontaneity of animals.</p>
+            <div class="paintings-grid">
+              <div class="painting-card">
+                <div class="painting-frame">
+                  <img src="photo_Fox.jpg" alt="Fox">
+                  <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+                </div>
+                <div class="painting-title">Fox Portrait</div>
+                <div class="painting-meta"><span class="painting-info-text">oil · 20×20 cm · 2026</span></div>
+              </div>
+              <div class="painting-card">
+                <div class="painting-frame">
+                  <img src="photo_Cat.JPG" alt="A rainy day">
+                  <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+                </div>
+                <div class="painting-title">A rainy day</div>
+                <div class="painting-meta"><span class="painting-info-text">oil · 30×30 cm · 2022</span></div>
+              </div>
+              <div class="painting-card">
+                <div class="painting-frame">
+                  <img src="photo_Rooster.jpg" alt="Rooster">
+                  <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+                </div>
+                <div class="painting-title">Rooster</div>
+                <div class="painting-meta"><span class="painting-info-text">oil · 18×24 cm · 2026</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="series-item" id="series-childhood">
+          <div class="series-header" onclick="toggleSeries('series-childhood')">
+            <div class="series-left">
+              <span class="series-number">04</span>
+              <span class="series-name">Childhood</span>
+              <span class="series-tag">Figurative</span>
+            </div>
+            <span class="series-meta">3 works</span>
+            <div class="series-toggle"><span class="toggle-icon">+</span></div>
+          </div>
+          <div class="series-panel">
+            <p class="series-desc">In this series, I explore the sweet moments of childhood—curiosity, carelessness, and the twinkle in the eyes. Written with warmth and a mother's love.</p>
+            <div class="paintings-grid">
+              <div class="painting-card">
+                <div class="painting-frame">
+                  <img src="photo_Foot.jpg" alt="Sweet foot">
+                  <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+                </div>
+                <div class="painting-title">Sweet foot</div>
+                <div class="painting-meta"><span class="painting-info-text">oil · 25×30 cm · 2008</span></div>
+              </div>
+              <div class="painting-card">
+                <div class="painting-frame">
+                  <img src="photo_Waiting.jpg" alt="Waiting">
+                  <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+                </div>
+                <div class="painting-title">Waiting</div>
+                <div class="painting-meta"><span class="painting-info-text">oil · 40×60 cm · 2008</span></div>
+              </div>
+              <div class="painting-card">
+                <div class="painting-frame">
+                  <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                    <rect width="320" height="240" fill="#d8e8c8"/>
+                    <rect width="320" height="110" fill="#c8e0f0" opacity="0.6"/>
+                    <circle cx="240" cy="45" r="28" fill="#f8e860" opacity="0.85"/>
+                    <rect y="130" width="320" height="110" fill="#8aaa60"/>
+                    <rect y="160" width="320" height="80" fill="#7a9850"/>
+                    <ellipse cx="160" cy="140" rx="20" ry="26" fill="#e8c8a8"/>
+                    <rect x="148" y="163" width="24" height="50" fill="#e8a060"/>
+                    <rect x="136" y="168" width="16" height="40" fill="#d09050" opacity="0.8" rx="3"/>
+                    <rect x="168" y="168" width="16" height="40" fill="#d09050" opacity="0.8" rx="3"/>
+                    <ellipse cx="160" cy="136" rx="14" ry="18" fill="#e0b890"/>
+                    <ellipse cx="140" cy="115" rx="15" ry="12" fill="#d8c090" opacity="0.7"/>
+                  </svg>
+                  <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
+                </div>
+                <div class="painting-title">Summer Morning</div>
+                <div class="painting-meta"><span class="painting-info-text">oil · 40×50 cm · 2024</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-
-    <div class="series-item" id="series-birds">
-      <div class="series-header" onclick="toggleSeries('series-birds')">
-        <div class="series-left">
-          <span class="series-number">02</span>
-          <span class="series-name">Birds</span>
-          <span class="series-tag">Wildlife</span>
-        </div>
-        <span class="series-meta">3 works</span>
-        <div class="series-toggle"><span class="toggle-icon">+</span></div>
-      </div>
-      <div class="series-panel">
-        <p class="series-desc">In this series, I explore the beauty and individuality of birds, striving to convey both their grace and their emotional presence in nature.</p>
-        <div class="paintings-grid">
-          <div class="painting-card">
-            <div class="painting-frame">
-              <img src="photo_Purple_Robin.jpg" alt="Purple Robin">
-              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
-            </div>
-            <div class="painting-title">Purple Robin</div>
-            <div class="painting-meta"><span class="painting-info-text">oil · 20×20 cm · 2025</span></div>
-          </div>
-          <div class="painting-card">
-            <div class="painting-frame">
-              <img src="photo_Zaunkoenig.jpg" alt="Wren">
-              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
-            </div>
-            <div class="painting-title">Wren</div>
-            <div class="painting-meta"><span class="painting-info-text">oil · 20×20 cm · 2025</span></div>
-          </div>
-          <div class="painting-card">
-            <div class="painting-frame">
-              <img src="photo_Sperling.jpg" alt="Sparrow on a branch">
-              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
-            </div>
-            <div class="painting-title">Sparrow on a branch</div>
-            <div class="painting-meta"><span class="painting-info-text">oil · 20×20 cm · 2025</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="series-item" id="series-animals">
-      <div class="series-header" onclick="toggleSeries('series-animals')">
-        <div class="series-left">
-          <span class="series-number">03</span>
-          <span class="series-name">Animals</span>
-          <span class="series-tag">Wildlife</span>
-        </div>
-        <span class="series-meta">3 works</span>
-        <div class="series-toggle"><span class="toggle-icon">+</span></div>
-      </div>
-      <div class="series-panel">
-        <p class="series-desc">In this series, I explore the wild beauty and spontaneity of animals.</p>
-        <div class="paintings-grid">
-          <div class="painting-card">
-            <div class="painting-frame">
-              <img src="photo_Fox.jpg" alt="Fox">
-              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
-            </div>
-            <div class="painting-title">Fox Portrait</div>
-            <div class="painting-meta"><span class="painting-info-text">oil · 20×20 cm · 2026</span></div>
-          </div>
-          <div class="painting-card">
-            <div class="painting-frame">
-              <img src="photo_Cat.JPG" alt="A rainy day">
-              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
-            </div>
-            <div class="painting-title">A rainy day</div>
-            <div class="painting-meta"><span class="painting-info-text">oil · 30×30 cm · 2022</span></div>
-          </div>
-          <div class="painting-card">
-            <div class="painting-frame">
-              <img src="photo_Rooster.jpg" alt="Rooster">
-              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
-            </div>
-            <div class="painting-title">Rooster</div>
-            <div class="painting-meta"><span class="painting-info-text">oil · 18×24 cm · 2026</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="series-item" id="series-childhood">
-      <div class="series-header" onclick="toggleSeries('series-childhood')">
-        <div class="series-left">
-          <span class="series-number">04</span>
-          <span class="series-name">Childhood</span>
-          <span class="series-tag">Figurative</span>
-        </div>
-        <span class="series-meta">3 works</span>
-        <div class="series-toggle"><span class="toggle-icon">+</span></div>
-      </div>
-      <div class="series-panel">
-        <p class="series-desc">In this series, I explore the sweet moments of childhood—curiosity, carelessness, and the twinkle in the eyes. Written with warmth and a mother's love.</p>
-        <div class="paintings-grid">
-          <div class="painting-card">
-            <div class="painting-frame">
-              <img src="photo_Foot.jpg" alt="Sweet foot">
-              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
-            </div>
-            <div class="painting-title">Sweet foot</div>
-            <div class="painting-meta"><span class="painting-info-text">oil · 25×30 cm · 2008</span></div>
-          </div>
-          <div class="painting-card">
-            <div class="painting-frame">
-              <img src="photo_Waiting.jpg" alt="Waiting">
-              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
-            </div>
-            <div class="painting-title">Waiting</div>
-            <div class="painting-meta"><span class="painting-info-text">oil · 40×60 cm · 2008</span></div>
-          </div>
-          <div class="painting-card">
-            <div class="painting-frame">
-              <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                <rect width="320" height="240" fill="#d8e8c8"/>
-                <rect width="320" height="110" fill="#c8e0f0" opacity="0.6"/>
-                <circle cx="240" cy="45" r="28" fill="#f8e860" opacity="0.85"/>
-                <rect y="130" width="320" height="110" fill="#8aaa60"/>
-                <rect y="160" width="320" height="80" fill="#7a9850"/>
-                <ellipse cx="160" cy="140" rx="20" ry="26" fill="#e8c8a8"/>
-                <rect x="148" y="163" width="24" height="50" fill="#e8a060"/>
-                <rect x="136" y="168" width="16" height="40" fill="#d09050" opacity="0.8" rx="3"/>
-                <rect x="168" y="168" width="16" height="40" fill="#d09050" opacity="0.8" rx="3"/>
-                <ellipse cx="160" cy="136" rx="14" ry="18" fill="#e0b890"/>
-                <ellipse cx="140" cy="115" rx="15" ry="12" fill="#d8c090" opacity="0.7"/>
-              </svg>
-              <div class="painting-overlay"><span class="overlay-zoom">View</span></div>
-            </div>
-            <div class="painting-title">Summer Morning</div>
-            <div class="painting-meta"><span class="painting-info-text">oil · 40×50 cm · 2024</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
-
-<!-- PLATFORMS / PRINTS 
-<section class="platforms-section" id="prints">
-  <div class="platforms-inner">
-    <div class="platforms-icons">
-      <a href="https://www.saatchiart.com" target="_blank" class="platform-icon-link" title="Saatchi Art">
-        <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAC4AK8DASIAAhEBAxEB/8QAHAAAAgIDAQEAAAAAAAAAAAAAAAcGCAMEBQIB/8QARBAAAQMCAgYHBQYFAwIHAAAAAQIDBAAFBhEHEiExQWETIlFxgZGhFCNCUrEIMjNiwdEVcpKi8EOCshYkNlNUdMLh8f/EABsBAAICAwEAAAAAAAAAAAAAAAAFBAYCAwcB/8QAOxEAAQIDBQUHAwMDAwUAAAAAAQIDAAQRBQYhMVESQWFxkRMigaGxwdEUMvAHI+EVQvEzYrJykqLC0v/aAAwDAQACEQMRAD8AuQ64EczWEur7cvCvjpzcV314ogjJ0rnzelHSufN6VjoogjJ0rnzelHSufN6VhdcbZaU66tKG0DNSlHIAdpNJ/SBpUdWt624YVqIGaVTiMye3UB3d58O2pUrJuzStlseO6Ic7PsyaNp08hvMMzEmLbNh5krulxbaX8LSRrOK7kjb+lLu8aa16xTaLSSOC5KwP7U/vSnYYuF2n6jLUmdLdOZCQXFqPaeNMCwaIL1LbS7dpbFvSrb0afeODvy2A+Jp6LOkpQVmFVP5uGMVk2raM8qkqmg/MycI1JWl7GTqj0b0GOOAbjA5f1E1jY0tY1bOapsV7kuKn/AOOVTqHoew42ke0zLjIVxIWlA8gn9ayyNEOFnAeieuTJ/K8k/VJrz6yzBhseUZfQWwe92n/l+CI5a9NV0QoC52qO8niphRQfI51PsL6RMP38hpib7LKP+hJAQo9x3K8DUCvOhqShKl2i7tunjQnWprCdxHoTaUFu4fuikHeGZYzHdrAZ+hpW4kwxfcOvlq72557KdedZcT4LMMNiTF0i1S5rIKeTW0iUiS2oAhxQyVkR4d3ELV89VeTerTGGb1wjp5BYJ8hVbxbvZRl7GW+ZR+tfRL9mOYk9ER+fKtCr3vqTRpsE+NOg+YXruvLqV+0s040r5fEPyRjOytnJtUh/mhvL/llXMuuK7LcYi4ky0rlMLGSkOhJBpOtYsbZ6rrgfH5UnPz3VI8L3K1X50R27pFhSCdjUolBV3HLVPdnnypWbw3gcWA0ADuoPkx47dtplsqcQSnfn7RFMeWpi19JcbPFlOQAc1NKIUtkd/FPPeK5WA9JZwxdRJY6cx3NkhhQ6rg8DsUOBp4qwRc1I6siIsEfMcj6UmdLWii8WMrvcCK25CWr3yGlg9Eo8Rnl1T6GrvYt5LwPD6a0Gia5HZz4Gm/Q+8cvvDYUvJn6yzl0AzFcuI4aj2ysdhrFlgxDbmZ1suTLjbycwlStVQPEEHbmK7YIIzBzFUswHfJWG7qGZzbyIEhQDoUk5IPBY7uPKnxar5cYJS5EmKLZ26ijrIUO79qWWheZyy5nspxnunIj4O8c4fWGEWvK9o0qi04KB115H+IbdFRexYwiS1JYnpEV07AvPqE9/DxqUAggEEEHcRVgkLSlrQb7SXWFDzHMZiM35dxhWy4KQUUUVOjTHpz8RXea816c/EV3mlrpwxkuw2pNntz2pcZqDrLSeszhu5J7CO0Eg4JoijJ0rnzelHSufN6VjoogjJ0rnzelZWndbYdhrWr7RBH1z8RXea816c/EV3mvNEEFFFQ/HOkOxYWBYW57bP4RmVAlPNZ3J+vKtbryGU7SzQRIlpV6acDbKSonSJhXOu1+stpQV3O6w4gTtPSvJSfKq84q0m4ovqlNNyzbYh3MxSUkj8y/vHwyHKlpfpj0l4xmy484fxFbVE8qXy1omdmAzLprqTuGtP8RZl3WMpLl+dcCeA9K5esNHSxpaiX2Su12uQ7/C2lZEoSQZBHE55dXsHjUHtN1iS5CekZlJjg9daUpzy5ZnfWrgrAGJsVyVottuUWmsi644tKEpz3Dad9MyJoWxWGkp6W1MpA2J6dRI8kVYLSteakGxLyiO9rTLjjmTCKQuxYU66ZideqP8AqGPDDICO5hbSXgzDsNMW34entDLru9RTjh7VHPb9Kk0LTJhB9WT6bjE5uRwof2FR9KWN40Y3i2D394tBXwbS8srPhqfWua3hGU3teHS8kKAHrXPJu88xLukPrG1oaV8YuqLAu+WgGSQN1D8xYO1Y5wjc9URL9DK1bkOK6NR/2ryNdOTerTGGb1wjp5BYJ8hVbxbvZRl7GW+ZR+tfRL9mOYk9ER+fKtCr3vqTRpsE+NOg+YXruvLqV+0s040r5fEPyRjOytnJtUh/mhvL/llXMuuK7LcYi4ky0rlMLGSkOhJBpOtYsbZ6rrgfH5UnPz3VI8L3K1X50R27pFhSCdjUolBV3HLVPdnnypWbw3gcWA0ADuoPkx47dtplsqcQSnfn7RFMeWpi19JcbPFlOQAc1NKIUtkd/FPPeK5WA9JZwxdRJY6cx3NkhhQ6rg8DsUOBp4qwRc1I6siIsEfMcj6UmdLWii8WMrvcCK25CWr3yGlg9Eo8Rnl1T6GrvYt5LwPD6a0Gia5HZz4Gm/Q+8cvvDYUvJn6yzl0AzFcuI4aj2ysdhrFlgxDbmZ1suTLjbycwlStVQPEEHbmK7YIIzBzFUswHfJWG7qGZzbyIEhQDoUk5IPBY7uPKnxar5cYJS5EmKLZ26ijrIUO79qWWheZyy5nspxnunIj4O8c4fWGEWvK9o0qi04KB115H+IbdFRexYwiS1JYnpEV07AvPqE9/DxqUAggEEEHcRVgkLSlrQb7SXWFDzHMZiM35dxhWy4KQUUUVOjTHpz8RXea816c/EV3mlrpwxkuw2pNntz2pcZqDrLSes1hu5J7CO0Eg4JoijJ0rnzelHSufN6VjoogjJ0rnzelZWndbYdhrWr7RBH1z8RXea816c/EV3mvNEEFFFQ/HOkOxYWBYW57bP4RmVAlPNZ3J+vKtbryGU7SzQRIlpV6acDbKSonSJhXOu1+stpQV3O6w4gTtPSvJSfKq84q0m4ovqlNNyzbYh3MxSUkj8y/vHwyHKlpfpj0l4xmy484fxFbVE8qXy1omdmAzLprqTuGtP8RZl3WMpLl+dcCeA9K5esNHSxpaiX2Su12uQ7/C2lZEoSQZBHE55dXsHjUHtN1iS5CekZlJjg9daUpzy5ZnfWrgrAGJsVyVottuUWmsi644tKEpz3Dad9MyJoWxWGkp6W1MpA2J6dRI8kVYLSteakGxLyiO9rTLjjmTCKQuxYU66ZideqP8AqGPDDICO5hbSXgzDsNMW34entDLru9RTjh7VHPb9Kk0LTJhB9WT6bjE5uRwof2FR9KWN40Y3i2D394tBXwbS8srPhqfWua3hGU3teHS8kKAHrXPJu88xLukPrG1oaV8YuqLAu+WgGSQN1D8xYO1Y5wjc9URL9DK1bkOK6NR/2ryNdOTerTGGb1wjp5BYJ8hVbxbvZRl7GW+ZR+tfRL9mOYk9ER+fKtCr3vqTRpsE+NOg+YXruvLqV+0s040r5fEPyRjOytnJtUh/mhvL/llXMuuK7LcYi4ky0rlMLGSkOhJBpOtYsbZ6rrgfH5UnPz3VI8L3K1X50R27pFhSCdjUolBV3HLVPdnnypWbw3gcWA0ADuoPkx47dtplsqcQSnfn7RFMeWpi19JcbPFlOQAc1NKIUtkd/FPPeK5WA9JZwxdRJY6cx3NkhhQ6rg8DsUOBp4qwRc1I6siIsEfMcj6UmdLWii8WMrvcCK25CWr3yGlg9Eo8Rnl1T6GrvYt5LwPD6a0Gia5HZz4Gm/Q+8cvvDYUvJn6yzl0AzFcuI4aj2ysdhrFlgxDbmZ1suTLjbycwlStVQPEEHbmK7YIIzBzFUswHfJWG7qGZzbyIEhQDoUk5IPBY7uPKnxar5cYJS5EmKLZ26ijrIUO79qWWheZyy5nspxnunIj4O8c4fWGEWvK9o0qi04KB115H+IbdFRexYwiS1JYnpEV07AvPqE9/DxqUAggEEEHcRVgkLSlrQb7SXWFDzHMZiM35dxhWy4KQUUUVOjTHpz8RXea816c/EV3mlrpwxkuw2pNntz2pcZqDrLSes1hu5J7CO0Eg4JoijJ0rnzelHSufN6VjoogjJ0rnzelZWndbYdhrWr7RBH1z8RXea816c/EV3mvNEEFFFQ/HOkOxYWBYW57bP4RmVAlPNZ3J+vKtbryGU7SzQRIlpV6acDbKSonSJhXOu1+stpQV3O6w4gTtPSvJSfKq84q0m4ovqlNNyzbYh3MxSUkj8y/vHwyHKlpfpj0l4xmy484fxFbVE8qXy1omdmAzLprqTuGtP8RZl3WMpLl+dcCeA9K5esNHSxpaiX2Su12uQ7/C2lZEoSQZBHE55dXsHjUHtN1iS5CekZlJjg9daUpzy5ZnfWrgrAGJsVyVottuUWmsi644tKEpz3Dad9MyJoWxWGkp6W1MpA2J6dRI8kVYLSteakGxLyiO9rTLjjmTCKQuxYU66ZideqP8AqGPDDICO5hbSXgzDsNMW34entDLru9RTjh7VHPb9Kk0LTJhB9WT6bjE5uRwof2FR9KWN40Y3i2D394tBXwbS8srPhqfWua3hGU3teHS8kKAHrXPJu88xLukPrG1oaV8YuqLAu+WgGSQN1D8xYO1Y5wjc9URL9DK1bkOK6NR/2ryNdOTerTGGb1wjp5BYJ8hVbxbvZRl7GW+ZR+tfRL9mOYk9ER+fKtCr3vqTRpsE+NOg+YXruvLqV+0s040r5fEPyRjOytnJtUh/mhvL/llXMuuK7LcYi4ky0rlMLGSkOhJBpOtYsbZ6rrgfH5UnPz3VI8L3K1X50R27pFhSCdjUolBV3HLVPdnnypWbw3gcWA0ADuoPkx47dtplsqcQSnfn7RFMeWpi19JcbPFlOQAc1NKIUtkd/FPPeK5WA9JZwxdRJY6cx3NkhhQ6rg8DsUOBp4qwRc1I6siIsEfMcj6UmdLWii8WMrvcCK25CWr3yGlg9Eo8Rnl1T6GrvYt5LwPD6a0Gia5HZz4Gm/Q+8cvvDYUvJn6yzl0AzFcuI4aj2ysdhrFlgxDbmZ1suTLjbycwlStVQPEEHbmK7YIIzBzFUswHfJWG7qGZzbyIEhQDoUk5IPBY7uPKnxar5cYJS5EmKLZ26ijrIUO79qWWheZyy5nspxnunIj4O8c4fWGEWvK9o0qi04KB115H+IbdFRexYwiS1JYnpEV07AvPqE9/DxqUAggEEEHcRVgkLSlrQb7SXWFDzHMZiM35dxhWy4KQUUUVOjTHpz8RXea816c/EV3mlrpwxkuw2pNntz2pcZqDrLSes1hu5J7CO0Eg4JoijJ0rnzelHSufN6VjoogjJ0rnzelZWndbYdhrWr7RBH1z8RXea816c/EV3mvNEEFFFQ/HOkOxYWBYW57bP4RmVAlPNZ3J+vKtbryGU7SzQRIlpV6acDbKSonSJhXOu1+stpQV3O6w4gTtPSvJSfKq84q0m4ovqlNNyzbYh3MxSUkj8y/vHwyHKlpfpj0l4xmy484fxFbVE8qXy1omdmAzLprqTuGtP8RZl3WMpLl+dcCeA9K5esNHSxpaiX2Su12uQ7/C2lZEoSQZBHE55dXsHjUHtN1iS5CekZlJjg9daUpzy5ZnfWrgrAGJsVyVottuUWmsi644tKEpz3Dad9MyJoWxWGkp6W1MpA2J6dRI8kVYLSteakGxLyiO9rTLjjmTCKQuxYU66ZideqP8AqGPDDICO5hbSXgzDsNMW34entDLru9RTjh7VHPb9Kk0LTJhB9WT6bjE5uRwof2FR9KWN40Y3i2D394tBXwbS8srPhqfWua3hGU3teHS8kKAHrXPJu88xLukPrG1oaV8YuqLAu+WgGSQN1D8xYO1Y5wjc9URL9DK1bkOK6NR/2ryNdOTerTGGb1wjp5BYJ8hVbxbvZRl7GW+ZR+tfRL9mOYk9ER+fKtCr3vqTRpsE+NOg+YXruvLqV+0s040r5fEPyRjOytnJtUh/mhvL/llXMuuK7LcYi4ky0rlMLGSkOhJBpOtYsbZ6rrgfH5UnPz3VI8L3K1X50R27pFhSCdjUolBV3HLVPdnnypWbw3gcWA0ADuoPkx47dtplsqcQSnfn7RFMeWpi19JcbPFlOQAc1NKIUtkd/FPPeK5WA9JZwxdRJY6cx3NkhhQ6rg8DsUOBp4qwRc1I6siIsEfMcj6UmdLWii8WMrvcCK25CWr3yGlg9Eo8Rnl1T6GrvYt5LwPD6a0Gia5HZz4Gm/Q+8cvvDYUvJn6yzl0AzFcuI4aj2ysdhrFlgxDbmZ1suTLjbycwlStVQPEEHbmK7YIIzBzFUswHfJWG7qGZzbyIEhQDoUk5IPBY7uPKnxar5cYJS5EmKLZ26ijrIUO79qWWheZyy5nspxnunIj4O8c4fWGEWvK9o0qi04KB115H+IbdFRexYwiS1JYnpEV07AvPqE9/DxqUAggEEEHcRVgkLSlrQb7SXWFDzHMZiM35dxhWy4KQUUUVOjTHpz8RXea816c/EV3mlrpwxkuw2pNntz2pcZqDrLSes1hu5J7CO0Eg4JoijJ0rnzelHSufN6VjoogjJ0rnzelZWndbYdhrWr7RBH1z8RXea816c/EV3mvNEEFFFQ/HOkOxYWBYW57bP4RmVAlPNZ3J+vKtbryGU7SzQRIlpV6acDbKSonSJhXOu1+stpQV3O6w4gTtPSvJSfKq84q0m4ovqlNNyzbYh3MxSUkj8y/vHwyHKlpfpj0l4xmy484fxFbVE8qXy1omdmAzLprqTuGtP8RZl3WMpLl+dcCeA9K5esNHSxpaiX2Su12uQ7/C2lZEoSQZBHE55dXsHjUHtN1iS5CekZlJjg9daUpzy5ZnfWrgrAGJsVyVottuUWmsi644tKEpz3Dad9MyJoWxWGkp6W1MpA2J6dRI8kVYLSteakGxLyiO9rTLjjmTCKQuxYU66ZideqP8AqGPDDICO5hbSXgzDsNMW34entDLru9RTjh7VHPb9Kk0LTJhB9WT6bjE5uRwof2FR9KWN40Y3i2D394tBXwbS8srPhqfWua3hGU3teHS8kKAHrXPJu88xLukPrG1oaV8YuqLAu+WgGSQN1D8xYO1Y5wjc9URL9DK1bkOK6NR/2ryNdOTerTGGb1wjp5BYJ8hVbxbvZRl7GW+ZR+tfRL9mOYk9ER+fKtCr3vqTRpsE+NOg+YXruvLqV+0s040r5fEPyRjOytnJtUh/mhvL/llXMuuK7LcYi4ky0rlMLGSkOhJBpOtYsbZ6rrgfH5UnPz3VI8L3K1X50R27pFhSCdjUolBV3HLVPdnnypWbw3gcWA0ADuoPkx47dtplsqcQSnfn7RFMeWpi19JcbPFlOQAc1NKIUtkd/FPPeK5WA9JZwxdRJY6cx3NkhhQ6rg8DsUOBp4qwRc1I6siIsEfMcj6UmdLWii8WMrvcCK25CWr3yGlg9Eo8Rnl1T6GrvYt5LwPD6a0Gia5HZz4Gm/Q+8cvvDYUvJn6yzl0AzFcuI4aj2ysdhrFlgxDbmZ1suTLjbycwlStVQPEEHbmK7YIIzBzFUswHfJWG7qGZzbyIEhQDoUk5IPBY7uPKnxar5cYJS5EmKLZ26ijrIUO79qWWheZyy5nspxnunIj4O8c4fWGEWvK9o0qi04KB115H+IbdFRexYwiS1JYnpEV07AvPqE9/DxqUAggEEEHcRVgkLSlrQb7SXWFDzHMZiM35dxhWy4KQUUUVOjTHpz8RXea816c/EV3mlrpwxkuw2pNntz2pcZqDrLSes1hu5J7CO0Eg4JoijJ0rnzelHSufN6VjoogjJ0rnzelZWndbYdhrWr7RBH1z8RXea816c/EV3mvNEEFFFQ/HOkOxYWBYW57bP4RmVAlPNZ3J+vKtbryGU7SzQRIlpV6acDbKSonSJhXOu1+stpQV3O6w4gTtPSvJSfKq84q0m4ovqlNNyzbYh3MxSUkj8y/vHwyHKlpfpj0l4xmy484fxFbVE8qXy1omdmAzLprqTuGtP8RZl3WMpLl+dcCeA9K5esNHSxpaiX2Su12uQ7/C2lZEoSQZBHE55dXsHjUHtN1iS5CekZlJjg9daUpzy5ZnfWrgrAGJsVyVottuUWmsi644tKEpz3Dad9MyJoWxWGkp6W1MpA2J6dRI8kVYLSteakGxLyiO9rTLjjmTCKQuxYU66ZideqP8AqGPDDICO5hbSXgzDsNMW34entDLru9RTjh7VHPb9Kk0LTJhB9WT6bjE5uRwof2FR9KWN40Y3i2D394tBXwbS8srPhqfWua3hGU3teHS8kKAHrXPJu88xLukPrG1oaV8YuqLAu+WgGSQN1D8xYO1Y5wjc9URL9DK1bkOK6NR/2ryNdOTerTGGb1wjp5BYJ8hVbxbvZRl7GW+ZR+tfRL9mOYk9ER+fKtCr3vqTRpsE+NOg+YXruvLqV+0s040r5fEPyRjOytnJtUh/mhvL/llXMuuK7LcYi4ky0rlMLGSkOhJBpOtYsbZ6rrgfH5UnPz3VI8L3K1X50R27pFhSCdjUolBV3HLVPdnnypWbw3gcWA0ADuoPkx47dtplsqcQSnfn7RFMeWpi19JcbPFlOQAc1NKIUtkd/FPPeK5WA9JZwxdRJY6cx3NkhhQ6rg8DsUOBp4qwRc1I6siIsEfMcj6UmdLWii8WMrvcCK25CWr3yGlg9Eo8Rnl1T6GrvYt5LwPD6a0Gia5HZz4Gm/Q+8cvvDYUvJn6yzl0AzFcuI4aj2ysdhrFlgxDbmZ1suTLjbycwlStVQPEEHbmK7YIIzBzFUswHfJWG7qGZzbyIEhQDoUk5IPBY7uPKnxar5cYJS5EmKLZ26ijrIUO79qWWheZyy5nspxnunIj4O8c4fWGEWvK9o0qi04KB115H+IbdFRexYwiS1JYnpEV07AvPqE9/DxqUAggEEEHcRVgkLSlrQb7SXWFDzHMZiM35dxhWy4KIcegBFABWlb9pFIr6JyLVPxuaRhCTQpx3UCRqP9+a10bKXv03Oo+XbS2VUK/1Z2oa82jfcNAJBT5/L78VN1bS3a9Tr7FgHT5LS7CZzD/b+mAiIqKhERCEREQhERcBxStxulCp5KYiKJe9cNLm7FySh1bS2rVBCiknf3cFPvR9dNJ5fJRbdLLUWKuqbVdIXQ1tNIWPaRwIP6Htqh+LTOqnNc7JGg7gfcrSdFxuN8yI1dVT2aE6z5Y6wPcNY9OqJiIldUy1ERCEREQhEREIRcS3V89qqfhFqo31ETCeFSzy2fdH5/qf3AraFSdM0OaHdcLh7TXTjUxFQMNJdYqN4x3dkdg3F9J9GsrVNnFxJO0lNHScjjqPm9RTHYNU5Rg1r+6VR8lpq4G1RreoHmKS2j+g6EEb1Xj2K6yy96dkYVN1xvMjvXbSCIiJCFyGkBEREIRERCEREQhEREIRERCERF0t6ukNitFTeqtnZx07C5Q/OdS8dtA/Feh2pz7fR1V6nDnPpiVIunMFfUE/WXt7aqF8Z3X0f2TZxZWsaGRtDWgYAA2BfVEVcrBEREIRERCEREQhEREIRERCFH2P8AHa3PN3rjWuBitVM4iOPj5B6nrKkFEXG9p9I2z7PblcSQJWRlsQ7XnjH16jxQhC5MrTJQblTT3xvBrn0vDUYRf2TXh9CjQZO3J8/RRVEEPkfE8GN4BIUQ+ltLkbxqAAOx8Tj5oiLAQhERCF0OC0VFJXVVVkSMI/eBb7R5Xf6zQiIhCwWbWtJiC6MpSVKnJZGr5ANNk7hxKj7GmbGQYDYYpFBqJmGV+T13kYHuA+aIiVlSLpqJBpSmepvUZe5eegbmSuE1TBBSlj1qLflLuJPKoVERF5NkREIRERCF//Z" alt="Saatchi Art">
-      </a>
-      <a href="https://www.artfinder.com" target="_blank" class="platform-icon-link" title="Artfinder">
-        <img src="data:image/png;base64,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" alt="Artfinder">
-      </a>
-      <a href="https://www.artmajeur.com" target="_blank" class="platform-icon-link" title="Artmajeur">
-        <img src="data:image/jpeg;base64,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" alt="Artmajeur">
-      </a>
-      <a href="https://www.pinterest.com" target="_blank" class="platform-icon-link platform-icon-full" title="Pinterest">
-        <img src="data:image/png;base64,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" alt="Pinterest">
-      </a>
-    </div>
-  </div>
-</section> -->
 
 <!-- ABOUT -->
-<section class="about-section" id="about">
-  <div style="padding:1.5rem 3rem; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleAbout()">
-    <span style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--muted); letter-spacing:0.2em;">ABOUT</span>
-    <span id="about-toggle" style="font-size:1rem; color:var(--muted); transition:transform 0.35s ease;">+</span>
+<section class="accordion-section" id="about">
+  <div class="accordion-header" onclick="toggleAccordion('about')">
+    <span class="accordion-label">ABOUT</span>
+    <span class="accordion-toggle" id="about-toggle">+</span>
   </div>
-
-  <div id="about-content" style="display:none; padding:2rem 3rem 4rem;">
-    <div style="display:grid; grid-template-columns:1fr 2fr; gap:5rem; align-items:start;">
-      <div class="about-label">About</div>
-      <div>
-        <div class="about-avatar">
-          <img src="photo_Avator.jpeg" alt="NAHO">
+  <div id="about-content" style="display:none;">
+    <div class="about-inner">
+      <div style="display:grid; grid-template-columns:1fr 2fr; gap:5rem; align-items:start;">
+        <div class="about-label">About</div>
+        <div>
+          <div class="about-avatar">
+            <img src="photo_Avator.jpeg" alt="NAHO">
+          </div>
+          <h2 style="font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; margin-bottom:1.25rem;">Artist NAHO</h2>
+          <p style="font-size:0.88rem; line-height:1.9; color:var(--muted); margin-bottom:1rem; max-width:540px;">Hello! My name is NAHO, and I am a painter based in Baden-Württemberg, Germany. Through my art, I strive to notice the beauty in everyday life — to capture fleeting moments and preserve their atmosphere on canvas. I draw inspiration from the natural world around me: animals, plants, and landscapes all become a source of emotion and reflection in my work. Painting is my way of expressing love and appreciation for the world we live in. I mainly work with oil and acrylic on canvas, although I enjoy experimenting with new materials and techniques from time to time. Each painting carries a small part of my personal journey, and I am truly grateful that my work resonates with others. Thank you for your interest in my art. I hope that one day at least one of my paintings will find a special place in your home.</p>
         </div>
-        <h2 style="font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; margin-bottom:1.25rem;">Artist NAHO</h2>
-        <p style="font-size:0.88rem; line-height:1.9; color:var(--muted); margin-bottom:1rem; max-width:540px;">Hello! My name is NAHO, and I am a painter based in Baden-Württemberg, Germany. Through my art, I strive to notice the beauty in everyday life — to capture fleeting moments and preserve their atmosphere on canvas. I draw inspiration from the natural world around me: animals, plants, and landscapes all become a source of emotion and reflection in my work. Painting is my way of expressing love and appreciation for the world we live in. I mainly work with oil and acrylic on canvas, although I enjoy experimenting with new materials and techniques from time to time. Each painting carries a small part of my personal journey, and I am truly grateful that my work resonates with others. Thank you for your interest in my art. I hope that one day at least one of my paintings will find a special place in your home.</p>
-        <p style="font-size:0.88rem; line-height:1.9; color:var(--muted); max-width:540px;"><!--Every original exists as a single unique piece — one painting, one owner. --></p>
       </div>
     </div>
   </div>
 </section>
-  
-<!-- CONTACT -->
-<section id="contact" style="background:#1a1814; border-top:0.5px solid rgba(250,248,244,0.1);">
-  <div style="padding:1.5rem 3rem; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleContact()">
-    <span style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:rgba(250,248,244,0.5); letter-spacing:0.2em;">CONTACT</span>
-    <span id="contact-toggle" style="font-size:1rem; color:rgba(250,248,244,0.4); transition:transform 0.35s ease;">+</span>
-  </div>
 
-  <div id="contact-content" style="display:none; padding:2rem 3rem 4rem; display:none;">
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; color:var(--warm-white);">
+<!-- CONTACT -->
+<section class="accordion-section" id="contact">
+  <div class="accordion-header" onclick="toggleAccordion('contact')">
+    <span class="accordion-label">CONTACT</span>
+    <span class="accordion-toggle" id="contact-toggle">+</span>
+  </div>
+  <div id="contact-content" style="display:none;">
+    <div class="contact-inner">
       <div>
-        <h2 style="font-family:'Cormorant Garamond',serif; font-size:2.5rem; font-weight:300; line-height:1.2; margin-bottom:1rem;">A question<br>or commission?</h2>
-        <p style="font-size:0.85rem; line-height:1.85; color:rgba(250,248,244,0.6);">Write to me — I reply within 24 hours. Custom commissions are available upon request.</p>
+        <h2>A question<br>or commission?</h2>
+        <p>Write to me — I reply within 24 hours. Custom commissions are available upon request.</p>
       </div>
       <form class="contact-form" action="https://formspree.io/f/mojbbvkj" method="POST">
         <input type="text" placeholder="Your name" required>
@@ -867,39 +856,41 @@
   </div>
 </section>
 
-  <section id="impressum" style="background:#1a1814; border-top:0.5px solid rgba(250,248,244,0.1);">
-  <div style="padding:1.5rem 3rem; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleImpressum()">
-    <span style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:rgba(250,248,244,0.5); letter-spacing:0.2em;">IMPRESSUM</span>
-    <span id="impressum-toggle" style="font-size:1rem; color:rgba(250,248,244,0.4); transition:transform 0.35s ease;">+</span>
+<!-- IMPRESSUM -->
+<section class="accordion-section" id="impressum">
+  <div class="accordion-header" onclick="toggleAccordion('impressum')">
+    <span class="accordion-label">IMPRESSUM</span>
+    <span class="accordion-toggle" id="impressum-toggle">+</span>
   </div>
-
-  <div id="impressum-content" style="display:none; padding:0 3rem 2rem; font-family:'Jost',sans-serif; font-size:0.8rem; line-height:1.9; color:rgba(250,248,244,0.6);">
-    <p><strong style="color:rgba(250,248,244,0.85);">Angaben gemäß § 5 DDG | Information according to § 5 DDG</strong></p>
-    <p>Natalya Holzwarth<br>
-    Adolf-Kolping-Str. 22<br>
-    74889 Sinsheim<br> 
-    BW, Deutschland</p>
-    <p><strong style="color:rgba(250,248,244,0.85);">Kontakt / Contact</strong><br>
-    E-Mail: naho.art.eu@gmail.com</p>
-    <p><strong style="color:rgba(250,248,244,0.85);">Verantwortlich für den Inhalt / Responsible for content</strong><br>
-    Natalya Holzwarth (Anschrift wie oben / address as above)</p>
-    <p style="color:rgba(250,248,244,0.4); margin-top:1rem; font-size:0.72rem;">
-    Diese Website dient als persönliches Künstler-Portfolio und hat informativen Charakter.<br>
-    This website serves as a personal artist portfolio and is provided for informational purposes.
-    </p>
-    <p style="color:rgba(250,248,244,0.4); margin-top:1rem; font-size:0.72rem; border-top:0.5px solid rgba(250,248,244,0.1); padding-top:1rem;">
-  © Alle Rechte an den auf dieser Website präsentierten Materialien liegen bei NAHO (Natalya Holzwarth).<br>
-  Jegliche Nutzung der präsentierten Materialien — ob privat oder kommerziell, durch Druck,<br>
-  Reproduktion, Nachahmung, Nachbildung und/oder Veröffentlichung in anderen Medien —<br> 
-  ist ohne vorherige schriftliche Zustimmung von NAHO untersagt.<br><br>
-  © All rights to the materials presented on this website belong to NAHO (Natalya Holzwarth).<br>
-  Any use of the presented materials — whether private or commercial, through printing,<br>
-  reproduction, imitation, replication and/or publication in other media — is prohibited<br> 
-  without the prior written consent of NAHO.
-</p>
+  <div id="impressum-content" style="display:none;">
+    <div class="impressum-inner">
+      <p><strong>Angaben gemäß § 5 DDG | Information according to § 5 DDG</strong></p>
+      <p>Natalya Holzwarth<br>
+      Adolf-Kolping-Str. 22<br>
+      74889 Sinsheim<br>
+      BW, Deutschland</p>
+      <p><strong>Kontakt / Contact</strong><br>
+      E-Mail: naho.art.eu@gmail.com</p>
+      <p><strong>Verantwortlich für den Inhalt / Responsible for content</strong><br>
+      Natalya Holzwarth (Anschrift wie oben / address as above)</p>
+      <p style="color:var(--muted); opacity:0.7; margin-top:1rem; font-size:0.72rem;">
+      Diese Website dient als persönliches Künstler-Portfolio und hat informativen Charakter.<br>
+      This website serves as a personal artist portfolio and is provided for informational purposes.
+      </p>
+      <p class="impressum-copy">
+      © Alle Rechte an den auf dieser Website präsentierten Materialien liegen bei NAHO (Natalya Holzwarth).<br>
+      Jegliche Nutzung der präsentierten Materialien — ob privat oder kommerziell, durch Druck,<br>
+      Reproduktion, Nachahmung, Nachbildung und/oder Veröffentlichung in anderen Medien —<br>
+      ist ohne vorherige schriftliche Zustimmung von NAHO untersagt.<br><br>
+      © All rights to the materials presented on this website belong to NAHO (Natalya Holzwarth).<br>
+      Any use of the presented materials — whether private or commercial, through printing,<br>
+      reproduction, imitation, replication and/or publication in other media — is prohibited<br>
+      without the prior written consent of NAHO.
+      </p>
+    </div>
   </div>
 </section>
-  
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
   <div class="lightbox-inner">
@@ -916,10 +907,33 @@
 </div>
 
 <footer>
-   <!-- IMPRESSUM ...> -->
+  <span class="footer-copyright">© NAHO — Natalya Holzwarth</span>
+  <span class="footer-logo">NAHO</span>
 </footer>
 
 <script>
+function toggleAccordion(id) {
+  const content = document.getElementById(id + '-content');
+  const toggle  = document.getElementById(id + '-toggle');
+  const isOpen  = content.style.display !== 'none' && content.style.display !== '';
+  content.style.display = isOpen ? 'none' : 'block';
+  toggle.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg)';
+}
+
+// Special case: contact uses grid layout
+const origToggle = toggleAccordion;
+window.toggleAccordion = function(id) {
+  const content = document.getElementById(id + '-content');
+  const toggle  = document.getElementById(id + '-toggle');
+  const isOpen  = content.style.display !== 'none' && content.style.display !== '';
+  if (id === 'contact') {
+    content.style.display = isOpen ? 'none' : 'block';
+  } else {
+    content.style.display = isOpen ? 'none' : 'block';
+  }
+  toggle.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg)';
+}
+
 function toggleSeries(id) {
   const item = document.getElementById(id);
   const isOpen = item.classList.contains('open');
@@ -928,16 +942,12 @@ function toggleSeries(id) {
 }
 
 function openLightbox(card) {
-  const frame  = card.querySelector('.painting-frame');
-  const title  = card.querySelector('.painting-title').textContent;
-  const meta   = card.querySelector('.painting-info-text').textContent;
+  const frame   = card.querySelector('.painting-frame');
+  const title   = card.querySelector('.painting-title').textContent;
+  const meta    = card.querySelector('.painting-info-text').textContent;
   const mediaEl = frame.querySelector('img') || frame.querySelector('svg');
-  const clone = mediaEl.cloneNode(true);
-  if (clone.tagName.toLowerCase() === 'img') {
-    clone.className = 'lightbox-img';
-  } else {
-    clone.className = 'lightbox-svg';
-  }
+  const clone   = mediaEl.cloneNode(true);
+  clone.className = clone.tagName.toLowerCase() === 'img' ? 'lightbox-img' : 'lightbox-svg';
   document.getElementById('lightbox-media').innerHTML = '';
   document.getElementById('lightbox-media').appendChild(clone);
   document.getElementById('lightbox-title').textContent = title;
@@ -955,29 +965,6 @@ function closeLightboxBg(e) {
   if (e.target === document.getElementById('lightbox')) closeLightbox();
 }
 
-  function toggleAbout() {
-  const content = document.getElementById('about-content');
-  const toggle  = document.getElementById('about-toggle');
-  const isOpen  = content.style.display === 'block';
-  content.style.display = isOpen ? 'none' : 'block';
-  toggle.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg)';
-}
-  
-function toggleContact() {
-  const content = document.getElementById('contact-content');
-  const toggle  = document.getElementById('contact-toggle');
-  const isOpen  = content.style.display === 'grid' || content.style.display === 'block';
-  content.style.display = isOpen ? 'none' : 'grid';
-  toggle.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg)';
-}
-  
-function toggleImpressum() {
-  const content = document.getElementById('impressum-content');
-  const toggle  = document.getElementById('impressum-toggle');
-  const isOpen  = content.style.display === 'block';
-  content.style.display = isOpen ? 'none' : 'block';
-  toggle.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg)';
-}
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeLightbox();
 });
@@ -997,4 +984,5 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 </script>
 </body>
+</html>
 </html>
