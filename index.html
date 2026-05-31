@@ -563,6 +563,18 @@
     .hero-title { font-size: 3.5rem; }
     .series-name { font-size: 1.3rem; }
   }
+
+  .footer-link {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.6;
+  text-decoration: none;
+  transition: opacity 0.2s, color 0.2s;
+}
+.footer-link:hover { opacity: 1; color: var(--ink); }
+  
 </style>
 </head>
 <body>
@@ -891,6 +903,67 @@
   </div>
 </section>
 
+  <!-- DATENSCHUTZ -->
+<section class="accordion-section" id="datenschutz">
+  <div class="accordion-header" onclick="toggleAccordion('datenschutz')">
+    <span class="accordion-label">DATENSCHUTZ</span>
+    <span class="accordion-toggle" id="datenschutz-toggle">+</span>
+  </div>
+  <div id="datenschutz-content" style="display:none;">
+    <div class="impressum-inner">
+
+      <p><strong>Datenschutzerklärung / Privacy Policy</strong></p>
+
+      <p><strong>Verantwortliche / Controller</strong><br>
+      Natalya Holzwarth<br>
+      Adolf-Kolping-Str. 22, 74889 Sinsheim<br>
+      E-Mail: naho.art.eu@gmail.com</p>
+
+      <p><strong>Hosting: GitHub Pages</strong><br>
+      Diese Website wird über GitHub Pages (GitHub, Inc., San Francisco, USA) gehostet.
+      GitHub kann beim Aufruf technische Daten wie IP-Adressen in Server-Logs erfassen.
+      Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am Betrieb der Website).<br>
+      Weitere Informationen:
+      <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+         target="_blank" rel="noopener" style="color:var(--accent);">GitHub Privacy Statement</a><br><br>
+      <em>This website is hosted via GitHub Pages. GitHub may collect technical data such as
+      IP addresses in server logs. Legal basis: Art. 6(1)(f) GDPR.
+      More information: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+         target="_blank" rel="noopener" style="color:var(--accent);">GitHub Privacy Statement</a></em></p>
+
+      <p><strong>Kontaktformular: Formspree</strong><br>
+      Das Kontaktformular wird über Formspree (Formspree, Inc., USA) betrieben. Nachrichten,
+      die du über das Formular sendest, werden von Formspree verarbeitet und an meine
+      E-Mail-Adresse weitergeleitet. Es findet keine Speicherung durch diese Website statt.
+      Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung / Anfrage).<br>
+      Weitere Informationen:
+      <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener"
+         style="color:var(--accent);">Formspree Privacy Policy</a><br><br>
+      <em>The contact form is powered by Formspree. Messages submitted are processed and
+      forwarded by Formspree. No data is stored by this website itself. Legal basis: Art. 6(1)(b) GDPR.
+      More information: <a href="https://formspree.io/legal/privacy-policy/" target="_blank"
+      rel="noopener" style="color:var(--accent);">Formspree Privacy Policy</a></em></p>
+
+      <p><strong>Cookies und Tracking / Cookies and Tracking</strong><br>
+      Diese Website verwendet keine Cookies und kein Tracking-Tool.
+      Es werden keine personenbezogenen Daten durch diese Website selbst erhoben oder gespeichert.<br>
+      <em>This website uses no cookies and no tracking. No personal data is collected or
+      stored by this website itself.</em></p>
+
+      <p><strong>Deine Rechte / Your rights (DSGVO / GDPR)</strong><br>
+      Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung
+      sowie das Recht auf Datenübertragbarkeit. Beschwerden können bei der zuständigen
+      Datenschutzbehörde eingereicht werden (Landesbeauftragter für den Datenschutz
+      Baden-Württemberg).<br>
+      Kontakt: naho.art.eu@gmail.com<br><br>
+      <em>You have the right to access, rectify, erase, restrict processing, and data portability.
+      Complaints may be lodged with the competent supervisory authority.
+      Contact: naho.art.eu@gmail.com</em></p>
+      
+    </div>
+  </div>
+</section>
+  
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
   <div class="lightbox-inner">
@@ -907,18 +980,35 @@
 </div>
 
 <footer>
-  <span class="footer-copyright">© NAHO — Natalya Holzwarth</span>
-  <span class="footer-logo">NAHO</span>
+  <span class="footer-copyright">© 2026 NAHO</span>
+  <div style="display:flex; gap:2rem; align-items:center;">
+    <a href="#impressum" class="footer-link" onclick="openAccordion('impressum')">Impressum</a>
+    <a href="#datenschutz" class="footer-link" onclick="openAccordion('datenschutz')">Datenschutz</a>
+  </div>
+<!-- <span class="footer-logo">NAHO</span> -->
 </footer>
-
+  
 <script>
-function toggleAccordion(id) {
+window.toggleAccordion = function(id) {
   const content = document.getElementById(id + '-content');
   const toggle  = document.getElementById(id + '-toggle');
   const isOpen  = content.style.display !== 'none' && content.style.display !== '';
   content.style.display = isOpen ? 'none' : 'block';
   toggle.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg)';
 }
+
+function openAccordion(id) {
+  const content = document.getElementById(id + '-content');
+  const toggle  = document.getElementById(id + '-toggle');
+  if (content.style.display === 'none' || content.style.display === '') {
+    content.style.display = 'block';
+    toggle.style.transform = 'rotate(45deg)';
+  }
+  setTimeout(() => {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }, 50);
+}
+
 
 // Special case: contact uses grid layout
 const origToggle = toggleAccordion;
