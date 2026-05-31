@@ -850,19 +850,28 @@ Thank you for your interest in my art. I hope that one day at least one of my pa
 </section>
 
 <!-- CONTACT -->
-<section class="contact-section" id="contact">
-  <div>
-    <h2>A question<br>or commission?</h2>
-    <p>Write to me — I reply within 24 hours. Custom commissions are available upon request.</p>
+<section id="contact" style="background:#1a1814; border-top:0.5px solid rgba(250,248,244,0.1);">
+  <div style="padding:1.5rem 3rem; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleContact()">
+    <span style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:rgba(250,248,244,0.5); letter-spacing:0.2em;">CONTACT</span>
+    <span id="contact-toggle" style="font-size:1rem; color:rgba(250,248,244,0.4); transition:transform 0.35s ease;">+</span>
   </div>
-  <form class="contact-form" action="https://formspree.io/f/mojbbvkj" method="POST">
-    <input type="text" placeholder="Your name" required>
-    <input type="email" placeholder="Email" required>
-    <textarea placeholder="Message"></textarea>
-    <input type="hidden" name="_replyto" value="naho.art.eu@gmail.com">
-    <input type="hidden" name="_subject" value="New message from NAHO website">
-    <button type="submit" class="contact-submit">Send →</button>
-  </form>
+
+  <div id="contact-content" style="display:none; padding:2rem 3rem 4rem; display:none;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; color:var(--warm-white);">
+      <div>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size:2.5rem; font-weight:300; line-height:1.2; margin-bottom:1rem;">A question<br>or commission?</h2>
+        <p style="font-size:0.85rem; line-height:1.85; color:rgba(250,248,244,0.6);">Write to me — I reply within 24 hours. Custom commissions are available upon request.</p>
+      </div>
+      <form class="contact-form" action="https://formspree.io/f/mojbbvkj" method="POST">
+        <input type="text" placeholder="Your name" required>
+        <input type="email" placeholder="Email" required>
+        <textarea placeholder="Message"></textarea>
+        <input type="hidden" name="_replyto" value="naho.art.eu@gmail.com">
+        <input type="hidden" name="_subject" value="New message from NAHO website">
+        <button type="submit" class="contact-submit">Send →</button>
+      </form>
+    </div>
+  </div>
 </section>
 
   <section id="impressum" style="background:#1a1814; border-top:0.5px solid rgba(250,248,244,0.1);">
@@ -951,6 +960,14 @@ function closeLightbox() {
 
 function closeLightboxBg(e) {
   if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+function toggleContact() {
+  const content = document.getElementById('contact-content');
+  const toggle  = document.getElementById('contact-toggle');
+  const isOpen  = content.style.display === 'grid' || content.style.display === 'block';
+  content.style.display = isOpen ? 'none' : 'grid';
+  toggle.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg)';
 }
   
 function toggleImpressum() {
