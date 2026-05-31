@@ -144,7 +144,7 @@
   }
   .hero-caption span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.06em; }
 
-  /* ── ACCORDION SECTIONS (all 4 same style) ── */
+  /* ── ACCORDION SECTIONS ── */
   .accordion-section {
     border-top: 0.5px solid var(--border);
     background: var(--warm-white);
@@ -170,7 +170,7 @@
     transition: transform 0.35s ease;
   }
 
-  /* ── PORTFOLIO (formerly gallery-section) ── */
+  /* ── PORTFOLIO ── */
   .portfolio-inner { padding: 0 3rem 4rem; }
 
   .section-header {
@@ -494,27 +494,13 @@
   }
   .contact-submit:hover { background: var(--accent); }
 
-  /* ── IMPRESSUM inner ── */
-  .impressum-inner {
-    padding: 0 3rem 2rem;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.8rem;
-    line-height: 1.9;
-    color: var(--muted);
-  }
-  .impressum-inner strong { color: var(--ink); }
-  .impressum-copy {
-    color: var(--muted);
-    opacity: 0.6;
-    margin-top: 1rem;
-    font-size: 0.72rem;
-    border-top: 0.5px solid var(--border);
-    padding-top: 1rem;
-  }
-
+  /* ── FOOTER ── */
   footer {
     background: var(--warm-white);
     border-top: 0.5px solid var(--border);
+  }
+
+  .footer-main {
     padding: 1.5rem 3rem;
     display: flex;
     justify-content: space-between;
@@ -532,6 +518,51 @@
     font-size: 1.1rem;
     color: var(--muted);
     letter-spacing: 0.2em;
+  }
+  .footer-link {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.6;
+    text-decoration: none;
+    transition: opacity 0.2s, color 0.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    padding: 0;
+  }
+  .footer-link:hover { opacity: 1; color: var(--ink); }
+
+  /* ── FOOTER PANELS (Impressum / Datenschutz) ── */
+  .footer-panel {
+    border-top: 0.5px solid var(--border);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.45s ease;
+  }
+  .footer-panel.open {
+    max-height: 2000px;
+  }
+  .footer-panel-inner {
+    padding: 2rem 3rem 2.5rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    line-height: 1.9;
+    color: var(--muted);
+  }
+  .footer-panel-inner strong { color: var(--ink); }
+  .footer-panel-inner p { margin-bottom: 0.85rem; }
+  .footer-panel-inner a { color: var(--accent); }
+  .impressum-copy {
+    color: var(--muted);
+    opacity: 0.6;
+    margin-top: 1rem;
+    font-size: 0.72rem;
+    border-top: 0.5px solid var(--border);
+    padding-top: 1rem;
   }
 
   @keyframes fadeUp {
@@ -551,10 +582,10 @@
     .hero-right { height: 60vw; }
     .accordion-header { padding: 1.2rem 1.5rem; }
     .portfolio-inner,
-    .about-inner,
-    .impressum-inner { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .about-inner { padding-left: 1.5rem; padding-right: 1.5rem; }
     .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; padding: 0 1.5rem 3rem; }
-    footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+    .footer-main { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+    .footer-panel-inner { padding: 1.5rem; }
     .series-desc { padding-left: 0; }
     .paintings-grid { grid-template-columns: repeat(2, 1fr); }
   }
@@ -563,18 +594,6 @@
     .hero-title { font-size: 3.5rem; }
     .series-name { font-size: 1.3rem; }
   }
-
-  .footer-link {
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  opacity: 0.6;
-  text-decoration: none;
-  transition: opacity 0.2s, color 0.2s;
-}
-.footer-link:hover { opacity: 1; color: var(--ink); }
-  
 </style>
 </head>
 <body>
@@ -868,14 +887,34 @@
   </div>
 </section>
 
-<!-- IMPRESSUM -->
-<section class="accordion-section" id="impressum">
-  <div class="accordion-header" onclick="toggleAccordion('impressum')">
-    <span class="accordion-label">IMPRESSUM</span>
-    <span class="accordion-toggle" id="impressum-toggle">+</span>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <div id="lightbox-media"></div>
+    <div class="lightbox-info">
+      <div class="lightbox-title" id="lightbox-title"></div>
+      <div class="lightbox-meta" id="lightbox-meta"></div>
+      <div class="lightbox-actions">
+        <button class="lightbox-btn" onclick="closeLightbox()">Close</button>
+      </div>
+    </div>
   </div>
-  <div id="impressum-content" style="display:none;">
-    <div class="impressum-inner">
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <span class="footer-copyright">© 2026 NAHO</span>
+    <div style="display:flex; gap:2rem; align-items:center;">
+      <button class="footer-link" onclick="toggleFooterPanel('impressum')">Impressum</button>
+      <button class="footer-link" onclick="toggleFooterPanel('datenschutz')">Datenschutz</button>
+    </div>
+  </div>
+
+  <!-- IMPRESSUM PANEL -->
+  <div class="footer-panel" id="footer-impressum">
+    <div class="footer-panel-inner">
       <p><strong>Angaben gemäß § 5 DDG | Information according to § 5 DDG</strong></p>
       <p>Natalya Holzwarth<br>
       Adolf-Kolping-Str. 22<br>
@@ -885,7 +924,7 @@
       E-Mail: naho.art.eu@gmail.com</p>
       <p><strong>Verantwortlich für den Inhalt / Responsible for content</strong><br>
       Natalya Holzwarth (Anschrift wie oben / address as above)</p>
-      <p style="color:var(--muted); opacity:0.7; margin-top:1rem; font-size:0.72rem;">
+      <p style="color:var(--muted); opacity:0.7; font-size:0.72rem;">
       Diese Website dient als persönliches Künstler-Portfolio und hat informativen Charakter.<br>
       This website serves as a personal artist portfolio and is provided for informational purposes.
       </p>
@@ -901,22 +940,15 @@
       </p>
     </div>
   </div>
-</section>
 
-  <!-- DATENSCHUTZ -->
-<section class="accordion-section" id="datenschutz">
-  <div class="accordion-header" onclick="toggleAccordion('datenschutz')">
-    <span class="accordion-label">DATENSCHUTZ</span>
-    <span class="accordion-toggle" id="datenschutz-toggle">+</span>
-  </div>
-  <div id="datenschutz-content" style="display:none;">
-    <div class="impressum-inner">
-
+  <!-- DATENSCHUTZ PANEL -->
+  <div class="footer-panel" id="footer-datenschutz">
+    <div class="footer-panel-inner">
       <p><strong>Datenschutzerklärung / Privacy Policy</strong></p>
 
       <p><strong>Verantwortliche / Controller</strong><br>
       Natalya Holzwarth<br>
-      Adolf-Kolping-Str. 22<br> 
+      Adolf-Kolping-Str. 22<br>
       74889 Sinsheim<br>
       E-Mail: naho.art.eu@gmail.com</p>
 
@@ -926,11 +958,11 @@
       Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am Betrieb der Website).<br>
       Weitere Informationen:
       <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
-         target="_blank" rel="noopener" style="color:var(--accent);">GitHub Privacy Statement</a><br><br>
+         target="_blank" rel="noopener">GitHub Privacy Statement</a><br><br>
       <em>This website is hosted via GitHub Pages. GitHub may collect technical data such as
       IP addresses in server logs. Legal basis: Art. 6(1)(f) GDPR.
       More information: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
-         target="_blank" rel="noopener" style="color:var(--accent);">GitHub Privacy Statement</a></em></p>
+         target="_blank" rel="noopener">GitHub Privacy Statement</a></em></p>
 
       <p><strong>Kontaktformular: Formspree</strong><br>
       Das Kontaktformular wird über Formspree (Formspree, Inc., USA) betrieben. Nachrichten,
@@ -938,12 +970,11 @@
       E-Mail-Adresse weitergeleitet. Es findet keine Speicherung durch diese Website statt.
       Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung / Anfrage).<br>
       Weitere Informationen:
-      <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener"
-         style="color:var(--accent);">Formspree Privacy Policy</a><br><br>
+      <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener">Formspree Privacy Policy</a><br><br>
       <em>The contact form is powered by Formspree. Messages submitted are processed and
       forwarded by Formspree. No data is stored by this website itself. Legal basis: Art. 6(1)(b) GDPR.
       More information: <a href="https://formspree.io/legal/privacy-policy/" target="_blank"
-      rel="noopener" style="color:var(--accent);">Formspree Privacy Policy</a></em></p>
+      rel="noopener">Formspree Privacy Policy</a></em></p>
 
       <p><strong>Cookies und Tracking / Cookies and Tracking</strong><br>
       Diese Website verwendet keine Cookies und kein Tracking-Tool.
@@ -960,35 +991,10 @@
       <em>You have the right to access, rectify, erase, restrict processing, and data portability.
       Complaints may be lodged with the competent supervisory authority.
       Contact: naho.art.eu@gmail.com</em></p>
-      
     </div>
   </div>
-</section>
-  
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
-  <div class="lightbox-inner">
-    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-    <div id="lightbox-media"></div>
-    <div class="lightbox-info">
-      <div class="lightbox-title" id="lightbox-title"></div>
-      <div class="lightbox-meta" id="lightbox-meta"></div>
-      <div class="lightbox-actions">
-        <button class="lightbox-btn" onclick="closeLightbox()">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<footer>
-  <span class="footer-copyright">© 2026 NAHO</span>
-  <div style="display:flex; gap:2rem; align-items:center;">
-    <a href="#impressum" class="footer-link" onclick="openAccordion('impressum')">Impressum</a>
-    <a href="#datenschutz" class="footer-link" onclick="openAccordion('datenschutz')">Datenschutz</a>
-  </div>
-<!-- <span class="footer-logo">NAHO</span> -->
 </footer>
-  
+
 <script>
 window.toggleAccordion = function(id) {
   const content = document.getElementById(id + '-content');
@@ -998,38 +1004,33 @@ window.toggleAccordion = function(id) {
   toggle.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg)';
 }
 
-function openAccordion(id) {
-  const content = document.getElementById(id + '-content');
-  const toggle  = document.getElementById(id + '-toggle');
-  if (content.style.display === 'none' || content.style.display === '') {
-    content.style.display = 'block';
-    toggle.style.transform = 'rotate(45deg)';
-  }
-  setTimeout(() => {
-    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-  }, 50);
-}
-
-
-// Special case: contact uses grid layout
-const origToggle = toggleAccordion;
-window.toggleAccordion = function(id) {
-  const content = document.getElementById(id + '-content');
-  const toggle  = document.getElementById(id + '-toggle');
-  const isOpen  = content.style.display !== 'none' && content.style.display !== '';
-  if (id === 'contact') {
-    content.style.display = isOpen ? 'none' : 'block';
-  } else {
-    content.style.display = isOpen ? 'none' : 'block';
-  }
-  toggle.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg)';
-}
-
 function toggleSeries(id) {
   const item = document.getElementById(id);
   const isOpen = item.classList.contains('open');
   document.querySelectorAll('.series-item.open').forEach(el => el.classList.remove('open'));
   if (!isOpen) item.classList.add('open');
+}
+
+function toggleFooterPanel(id) {
+  const panel = document.getElementById('footer-' + id);
+  const other = id === 'impressum' ? 'footer-datenschutz' : 'footer-impressum';
+  const otherPanel = document.getElementById(other);
+
+  // Close the other panel if open
+  if (otherPanel.classList.contains('open')) {
+    otherPanel.classList.remove('open');
+  }
+
+  const isOpen = panel.classList.contains('open');
+  if (isOpen) {
+    panel.classList.remove('open');
+  } else {
+    panel.classList.add('open');
+    // Smooth scroll to footer after short delay for animation to start
+    setTimeout(() => {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 50);
+  }
 }
 
 function openLightbox(card) {
@@ -1075,5 +1076,4 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 </script>
 </body>
-</html>
 </html>
